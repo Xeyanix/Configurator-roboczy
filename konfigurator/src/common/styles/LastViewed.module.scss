@@ -1,0 +1,26 @@
+.LastViewed {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background-color: darkcyan;
+    overflow-x: auto;
+    
+}
+
+.font {
+    font-size: 14px;
+    border: 2px solid;
+    border-radius: 25px;
+    box-sizing: border-box;
+    padding: 6px;
+    /* Lub inny preferowany rozmiar czcionki */
+    text-align: center;
+}
+
+.productList {
+    display: inline-block;
+    margin: 10px;
+}

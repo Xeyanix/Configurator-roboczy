@@ -1,0 +1,38 @@
+.contactSection {
+  background-color: rgb(15, 121, 150);
+  padding: 1rem;
+}
+
+
+.h2 {
+  display: flex;
+  background-color: #462777;
+  margin-bottom: var(--wp--preset--spacing-20);
+  text-transform: uppercase;
+  text-align: center;
+
+  // padding: 1rem;
+  // border: 1px solid black;
+  // border-radius: 5px;
+}
+
+.p {
+  display: flex;
+  margin-top: var(--wp--preset--spacing--20);
+  margin-bottom: var(--wp--preset--spacing--10);
+  text-transform: uppercase;
+  text-align: center;
+  
+  // padding: 1rem;
+  // border: 1px solid black;
+  // border-radius: 2px;
+}
+
+.socialMediaLinks {
+  display: flex;
+  justify-content: space-around;
+
+  // padding: 1rem;
+  // border: 1px solid black;
+  // border-radius: 20px;
+}

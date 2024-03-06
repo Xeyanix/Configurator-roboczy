@@ -1,0 +1,106 @@
+.MainContainer {
+  background-color: #306ea3;
+  max-width: 100%;
+}
+
+.wrapper {
+  background-color: #306ea3;
+  // transition: background-color 0.3s ease; POKOMBINWOAC 
+  cursor: pointer;
+}
+
+.otherPageButtons {
+  display: flex;
+  justify-content: center;
+  margin: 35px;
+  flex-direction: flex;
+  align-items: center;
+  border-radius: 8px;
+  height: 50px;
+  width: 100%;
+}
+
+.header {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 2rem;
+}
+
+.additionalText {
+  background-color: #333;
+  display: flex;
+  color: #fff;
+  padding: 1rem;
+  font-size: 1.5rem;
+  line-height: 1.8;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  max-height: 100%;
+  margin: 0 auto;
+}
+
+.projects {
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-template-columns: auto auto;
+  background-color: rgb(23, 94, 34);
+  height: calc(100vh - 100px);
+  overflow-x: auto;
+
+  .option {
+    display: auto;
+    color: black;
+    text-align: center;
+    justify-content: center;
+    padding: 2rem;
+    margin: 5%;
+    background-color: rgb(75, 199, 199);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+
+  }
+}
+
+.footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+  bottom: 0;
+}
+
+.downMenu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.copyrightText {
+  margin: 0;
+}
+
+.buttonsContainer {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.buttonsContainer Button {
+  text-transform: none;
+}
+
+
+.menu {
+  background-color: rgb(108, 99, 99);
+  height: 100%;
+}

@@ -1,0 +1,152 @@
+$color-red: red;
+
+.App {
+  display: flex;
+  width: 100%;
+  text-align: center;
+}
+
+.wrapper {
+  display: flex;
+  height: 230px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  border: 1px solid black;
+  background-color: lightblue;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.otherPageButtons {
+  display: flex;
+  justify-content: center;
+  margin: 35px;
+  flex-direction: flex;
+  align-items: center;
+
+
+  border: 1.5px solid black;
+  border-radius: 8px;
+  height: 50px;
+  width: 100%;
+}
+
+.loggedInMessage {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3px;
+  flex-direction: flex;
+  align-items: center;
+  text-decoration: underline;
+}
+
+.wrapper:hover {
+  background-color: #2980b9;
+}
+
+.myButton {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.smallerFont {
+  font-size: 20px;
+  max-width: 100%;
+  /* Lub inny preferowany rozmiar czcionki */
+}
+
+.AppHeader {
+  display: flex;
+  flex-direction: column;
+  background-color: #282c34;
+  height: calc(100vh - 100px);
+  align-items: center;
+  font-size: calc(10px + 2vmin);
+  justify-content: space-between;
+  color: $color-red;
+  width: 100%;
+  border: 1px solid black;
+  overflow-x: auto;
+}
+
+.cart {
+  background-color: rgb(53, 48, 48);
+  border: 1px solid #5c5656;
+  padding: 10px;
+  
+  margin: 10px;
+  border-radius: 5px;
+}
+
+.cartList {
+  justify-content: space-between;
+  margin: 10px;
+}
+
+.cartIsEmpty {
+  color:white;
+  background-color: #5c5656;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  justify-content: space-between;
+  margin: 10px;
+}
+
+.productsListNames {
+  color: white;
+  cursor: pointer;
+}
+
+.productsCartNames {
+  color: white;
+  cursor: pointer;
+  position: relative;
+  // border: 1px solid #ccc;
+
+  &::after {
+    content: attr(customTitle);
+    position: absolute;
+    bottom: 35px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.5rem;
+    background-color: #333;
+    color: #fff;
+    border-radius: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    white-space: nowrap;
+    box-shadow: 0 0 3px rgb(255, 255, 255);
+    font-size: 12px;
+  }
+
+  &:hover::after {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  // Triangle indicator
+  &::before {
+    content: "";
+    position: absolute;
+    border: solid;
+    border-color: lightgreen transparent;
+    border-width: 6px 6px 0 6px;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  &:hover::before {
+    opacity: 1;
+  }
+}
