@@ -1,1 +1,1 @@
-# configurator-roboczy
+# Configurator-pc-app
