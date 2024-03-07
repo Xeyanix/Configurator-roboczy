@@ -9,8 +9,8 @@ import LastViewed from '../LastViewed/LastViewed';
 function Dashboard() {
   const [cart, setCart] = useState([]);
   const [selectedMotherboard, setSelectedMotherboard] = useState(Motherboards);
-  const [MotherboardsToDisplay, setMotherboardsToDisplay] = useState(selectedMotherboard);
-  const [scrollPosition, setScrollPosition] = useState(0);
+  const [MotherboardsToDisplay] = useState(selectedMotherboard);
+  const [scrollPosition] = useState(0);
   const { login, loggedInUser } = useAuth();
   const [listViewed, setListViewed] = useState([]); // Użyj osobnego stanu dla listy ostatnio oglądanych
 
@@ -46,20 +46,23 @@ function Dashboard() {
   };
 
   return (
+    <div className={styles.appWrapper}>
+      <div className={styles.columnsWrapper}>
+        <ProductList
+          Motherboards={MotherboardsToDisplay}
+          dodawanie={addToCart} />
+        <Cart
+          cart={cart}
+          removeByRightClick={setCart}
+          remove={removeItem}
+          removeAll={removeAllItems}
+        />
 
+      </div>
+      <div>
+        <LastViewed cart={listViewed} />
+      </div>
 
-    <div className={styles.columnsWrapper}>
-      <ProductList
-        Motherboards={MotherboardsToDisplay}
-        dodawanie={addToCart} />
-      <Cart
-        cart={cart}
-        removeByRightClick={setCart}
-        remove={removeItem}
-        removeAll={removeAllItems}
-      />
-
-      <LastViewed cart={listViewed} />
     </div>
 
 

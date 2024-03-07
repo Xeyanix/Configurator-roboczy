@@ -10,9 +10,9 @@ import Header from "./components/Header/Header";
 import Dashboard from './components/Dashboard/Dashboard';
 
 function App() {
-  const [selectedMotherboard, setSelectedMotherboard] = useState(Motherboards);
-  const [MotherboardsToDisplay, setMotherboardsToDisplay] = useState(selectedMotherboard);
-  const { login, loggedInUser } = useAuth();
+  const [selectedMotherboard] = useState(Motherboards);
+  const [setMotherboardsToDisplay] = useState(selectedMotherboard);
+  const { loggedInUser } = useAuth();
 
   return (
     <AuthProvider>
