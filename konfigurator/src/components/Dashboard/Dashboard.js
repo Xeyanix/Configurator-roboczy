@@ -72,3 +72,5 @@ function Dashboard() {
 }
 
 export default Dashboard;
+
+//product list zmienic z zakupownik na dysku D 
