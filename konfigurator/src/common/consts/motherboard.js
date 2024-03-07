@@ -93,4 +93,4 @@ const Motherboards = [
 
 
 
-module.exports = Motherboards;
+export default Motherboards;

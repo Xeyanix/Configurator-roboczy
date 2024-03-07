@@ -14,8 +14,8 @@ function Header(props) {
     try {
       const resProducts = await axios.get(`http://localhost:9000/${path}`);
       dispatch(loadProducts(resProducts.data));
-      
-   
+
+
       const resShoppingList = await axios.get(
         `http://localhost:9000/products/shoppingList`
       );
@@ -29,7 +29,7 @@ function Header(props) {
   return (
     <div className={styles.headerWrapper}>
       <div className={styles.signedUserInfo}>
-       
+
         <Button
           variant="contained"
           onClick={() => getProductsFromAPI("products")}

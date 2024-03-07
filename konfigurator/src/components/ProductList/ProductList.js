@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import styles from '../../common/styles/Columns.module.scss';
 import CPUs from '../../common/consts/cpu';
 import RAMs from '../../common/consts/ram';
@@ -10,6 +10,18 @@ function ProductList (props) {
   const [showCpuList, setShowCpuList] = useState(false);
   const [selectedCpu, setSelectedCpu] = useState(null);
   const [showRamList, setShowRamList] = useState(false);
+  const [Motherboards, setMotherboards] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:5000/api/motherboards')
+      .then(response => response.json())
+      .then(data => {
+        setMotherboards(data); // Ustaw tablicę Motherboards
+      })
+      .catch(error => {
+        console.error('Błąd podczas pobierania danych:', error);
+      });
+  }, []);
 
   const handlePlytaClick = (motherboard) => {
     setSelectedMotherboard(motherboard);

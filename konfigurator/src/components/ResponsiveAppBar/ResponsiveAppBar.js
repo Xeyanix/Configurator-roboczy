@@ -11,7 +11,7 @@ import CloseIcon from '@mui/icons-material/Close';
 function ResponsiveAppBar() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const { loggedInUser } = useAuth();
-  const [open, setOpen] = useState(true);
+  const [openSnackbar, setOpenSnackbar] = useState(true);
   const navigate = useNavigate();
 
   const toggleDrawer = (open) => (event) => {
@@ -24,13 +24,15 @@ function ResponsiveAppBar() {
   const handleKontoClick = (event) => {
     event.preventDefault();
     if (!loggedInUser) {
-      setOpen(true);
-    } 
+      setOpenSnackbar(true);
+    } else {
+      navigate("/UserPage");
+    }
   };
 
   useEffect(() => {
     // Resetuj stan "open" przy zmianie ścieżki
-    setOpen(false);
+    setOpenSnackbar(false);
   }, [navigate]);
 
   const scrollToContactSection = () => {
@@ -106,16 +108,16 @@ function ResponsiveAppBar() {
 
             {!loggedInUser && (
               <Snackbar
-                open={open}
+                open={openSnackbar}
                 autoHideDuration={3000}
-                onClose={() => setOpen(false)}
+                onClose={() => setOpenSnackbar(false)}
                 message={`Zaloguj się ! `}
                 action={
                   <IconButton
                     size="small"
                     aria-label="close"
                     color="inherit"
-                    onClick={() => setOpen(false)}
+                    onClick={() => setOpenSnackbar(false)}
                   >
                     <CloseIcon fontSize="small" />
                   </IconButton>
@@ -126,8 +128,8 @@ function ResponsiveAppBar() {
             {loggedInUser && (
               <Alert
                 severity="success"
-                open={open}
-                onClose={() => setOpen(false)}
+                open={openSnackbar}
+              // onClose={() => setOpenSnackbar(false)}
               >
                 Zalogowany jako: {loggedInUser}
               </Alert>
