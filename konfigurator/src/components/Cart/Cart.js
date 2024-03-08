@@ -83,3 +83,111 @@ function Cart(props) {
 
 export default Cart;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useState } from "react";
+// import styles from "../../common/styles/Columns.module.scss";
+// import { useSelector, useDispatch } from "react-redux";
+// import {
+//   loadCartList,
+//   setProductsLoadingState,
+// } from "../../redux/appSlice";
+// import axios from "axios";
+// import CircularProgress from "@mui/material/CircularProgress";
+
+// function Cart() {
+//   const cart = useSelector((state) => state.app.cart);
+//   const loadingStatus = useSelector((state) => state.app.loadingStatus);
+//   const [deletedItemId, setdeletedItemId] = useState(0);
+//   const dispatch = useDispatch();
+
+//   const handleRemoveItem = async (productId) => {
+//     try {
+//       setdeletedItemId(productId);
+//       dispatch(setProductsLoadingState("RemovingItem"));
+//       await axios.delete(
+//         `http://localhost:9000/products/shoppingList/${productId}`
+//       );
+
+//       const response = await axios.get(
+//         `http://localhost:9000/products/shoppingList`
+//       );
+//       dispatch(loadCartList(response.data));
+//       dispatch(setProductsLoadingState("success"));
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
+
+//   const handleRemoveAllClick = async () => {
+//     try {
+//       dispatch(setProductsLoadingState("RemovingAllItems"));
+//       await axios.delete(
+//         `http://localhost:9000/products/shoppingList`
+//       );
+//       await Promise.all([
+//         axios.get(`http://localhost:9000/products/shoppingList`),
+//         dispatch(loadCartList([])),
+//       ]);
+
+
+//       dispatch(setProductsLoadingState("success"));
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
+
+
+//   return (
+//     <div className={styles.App}>
+//       <header className={styles.AppHeader}>
+//         <p>Shopping List</p>
+//         <div>
+//           {cart.length > 0
+//             ? cart.map((product) => (
+//               <div key={product.id} className={styles.ProductItem}>
+//                 <div>
+//                   <span>
+//                     {product.name}{" "}
+//                     {loadingStatus === "RemovingItem" &&
+//                       deletedItemId === product.id ? (
+//                       <CircularProgress />
+//                     ) : (
+//                       ""
+//                     )}
+//                   </span>
+//                   <button
+//                     className={styles.myButton}
+//                     onClick={() => handleRemoveItem(product.id)}
+//                   >
+//                     Usuń
+//                   </button>
+//                 </div>
+
+//               </div >
+//             ))
+//             : "Brak produktów do wyświetlenia w koszyku!"}
+//         </div>
+//         <button
+//           onClick={handleRemoveAllClick}>Usuń wszystkie
+//         </button>
+//       </header>
+//     </div >
+
+//   );
+// }
+
+// export default Cart;
+
+

@@ -1,13 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export const appSlice = createSlice({
-    name: "app",
+    name: "products",
     initialState: {
         productsList: [],
         filteredProducts: [],
         cart: [],
-        searchFilter: "",
-        foodOnly: false,
         loadingStatus: "initial",
     },
     reducers: {
@@ -17,11 +15,11 @@ export const appSlice = createSlice({
         loadCartList: (state, value) => {
             state.cart = value.payload;
         },
-       
+
         setProductsLoadingState: (state, value) => {
             state.loadingStatus = value.payload;
         },
-       
+
     },
 });
 
