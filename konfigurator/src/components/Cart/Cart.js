@@ -45,8 +45,6 @@ function Cart() {
       // customTitle={`Kliknij prawym, aby usunąć`}
       title={`${product.name}`}
     >
-
-
       {product.name}
       <span onClick={() => handleItemClick(product, index)}>
         {loadingStatus === "RemovingItem" &&

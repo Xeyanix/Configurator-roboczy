@@ -73,4 +73,4 @@ function Dashboard() {
 
 export default Dashboard;
 
-//product list zmienic z zakupownik na dysku D 
+//nie wsyswiertla sie last viewed po klikniecu na przycisk
