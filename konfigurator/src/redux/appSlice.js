@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export const appSlice = createSlice({
-    name: "products",
+    name: "app",
     initialState: {
         productsList: [],
         filteredProducts: [],

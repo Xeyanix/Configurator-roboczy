@@ -1,7 +1,10 @@
 const express = require('express');
-const app = express();
+const res = require('express/lib/response');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+
+
+const app = express();
 
 app.use(cors());
 app.use(express.static('public'));
@@ -18,9 +21,6 @@ app.use(logger);
 
 const productsRoutes = require('./routes/products');
 
-// Use the products routes
 app.use('/products', productsRoutes);
 
-app.listen(9000, () => {
-    console.log('Server is running on port 9000');
-});
+app.listen(9000);

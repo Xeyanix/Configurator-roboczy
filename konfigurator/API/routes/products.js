@@ -19,17 +19,17 @@ router.get("/", (req, res) => {
     ...motherboards.map((motherboard) => ({
       id: motherboard.id,
       name: motherboard.name,
-      type: 'Płyta główna', // adding field  "type"
+      type: 'Płyta główna', // Dodajemy pole "type", aby odróżnić płyty główne od CPU
     })),
     ...cpus.map((cpu) => ({
       id: cpu.id,
       name: cpu.name,
-      type: 'Procesor',
+      type: 'Procesor', // Dodajemy pole "type", aby odróżnić CPU od płyt głównych
     })),
     ...rams.map((ram) => ({
       id: ram.id,
       name: ram.name,
-      type: 'RAM',
+      type: 'RAM', // Dodajemy pole "type", aby odróżnić RAM od płyt głównych i CPU
     })),
   ];
 
@@ -42,9 +42,11 @@ router.get("/shoppingList", (req, res) => {
     (value) => Object.keys(value).length !== 0
   );
   setTimeout(() => {
-    res.status(200).json(
-      plainList.map((product) => ({ id: product.id, name: product.name }))
-    );
+    res
+      .status(200)
+      .json(
+        plainList.map((product) => ({ id: product.id, name: product.name }))
+      );
   }, 3000);
 });
 
@@ -53,6 +55,19 @@ router.post("/shoppingList/new", jsonParser, (req, res) => {
   setTimeout(() => {
     res.status(200).json(req.body);
   }, 3000);
+});
+
+
+router.delete("/shoppingList/:shoppingListId", jsonParser, (req, res) => {
+  setTimeout(() => {
+    res.status(200).json(req.body);
+  }, 3000);
+});
+
+
+router.post("/new", jsonParser, (req, res) => {
+  motherboards.push(req.body);
+  res.status(200).json(req.body);
 });
 
 router.get("/cpus/:id", (req, res) => {
@@ -78,18 +93,7 @@ router.get("/rams/:id", (req, res) => {
 });
 
 
-router.delete("/shoppingList", jsonParser, (req, res) => {
-  shoppingList = []; // Czyść listę zakupów
-  res.status(200).json({ message: "All items deleted from shopping list" });
-});
 
-
-
-
-router.post("/new", jsonParser, (req, res) => {
-  motherboards.push(req.body);
-  res.status(200).json(req.body);
-});
 
 
 
@@ -153,12 +157,20 @@ router.param("id", (req, res, next, id) => {
   next();
 });
 
+
 router.param("shoppingListId", (req, res, next, id) => {
   req.shoppingList = shoppingList;
   if (req.method === "DELETE") {
     req.productToDelete = shoppingList.find((product) => product.id === id);
+    shoppingList = shoppingList.filter((product) => product.id !== id);
+    req.shoppingList = shoppingList;
   }
 
+  next();
+
+});
+
+router.param("/new", (req, res, next, id) => {
   next();
 });
 
