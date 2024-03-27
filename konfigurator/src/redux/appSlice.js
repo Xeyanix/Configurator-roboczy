@@ -19,6 +19,10 @@ export const appSlice = createSlice({
         setProductsLoadingState: (state, value) => {
             state.loadingStatus = value.payload;
         },
+        clearCart: (state) => {
+            state.cart = [];
+          },
+
 
     },
 });
@@ -27,6 +31,7 @@ export const {
     loadProducts,
     loadCartList,
     setProductsLoadingState,
+    clearCart,
 } = appSlice.actions;
 
 export default appSlice.reducer;

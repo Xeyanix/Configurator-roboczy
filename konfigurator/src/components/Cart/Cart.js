@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   loadCartList,
   setProductsLoadingState,
+  clearCart,
 } from "../../redux/appSlice";
 import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -51,6 +52,24 @@ function Cart() {
     }
   };
 
+  const handleRemoveAll = async () => {
+  try {
+    dispatch(setProductsLoadingState("RemovingItem"));
+    console.log("Sending request to delete all items...");
+    const response = await axios.delete(`http://localhost:9000/products/shoppingList`);
+    console.log("Response from server:", response.data);
+
+    dispatch(clearCart());
+    dispatch(setProductsLoadingState("success"));
+    console.log("Cart cleared successfully.");
+  } catch (error) {
+    console.error("Error while clearing cart:", error);
+    dispatch(setProductsLoadingState("error"));
+  }
+};
+
+  
+  
   const totalPrice = () => {
     const Price = cart.reduce((acc, product) => acc + product.price, 0);
     return Price.toLocaleString('pl-PL', { minimumFractionDigits: 2 });
@@ -73,7 +92,12 @@ function Cart() {
           ""
         )}
       </span>
-      <button className={styles.myButton} onClick={() => handleItemClick(product, index)}>Usuń</button >
+      <button
+        className={styles.myButton}
+        onClick={() => handleItemClick(product, index)}
+      >
+        Usuń
+      </button >
     </li >
   ));
 
@@ -91,7 +115,7 @@ function Cart() {
               </ol>
               <button
                 className={styles.myButton}
-                onClick={() => handleItemClick()}
+                onClick={handleRemoveAll}
               >
                 Usuń wszystko
               </button>

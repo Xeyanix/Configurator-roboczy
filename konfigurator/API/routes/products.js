@@ -47,23 +47,30 @@ router.get("/shoppingList", (req, res) => {
       .json(
         plainList.map((product) => ({ id: product.id, name: product.name }))
       );
-  }, 3000);
+  }, 1000);
 });
 
 router.post("/shoppingList/new", jsonParser, (req, res) => {
   shoppingList.push(req.body);
   setTimeout(() => {
     res.status(200).json(req.body);
-  }, 3000);
+  }, 1000);
 });
 
 
 router.delete("/shoppingList/:shoppingListId", jsonParser, (req, res) => {
   setTimeout(() => {
     res.status(200).json(req.body);
-  }, 3000);
+  }, 1000);
 });
 
+router.delete("/shoppingList", (req, res) => {
+  shoppingList = []; // Czyszczenie całej listy zakupów
+  setTimeout(() => {
+    res.status(200).json({ message: "All products removed from shopping list" });
+  }, 1000);
+  
+});
 
 router.post("/new", jsonParser, (req, res) => {
   motherboards.push(req.body);
