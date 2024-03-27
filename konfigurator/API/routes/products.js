@@ -19,16 +19,19 @@ router.get("/", (req, res) => {
     ...motherboards.map((motherboard) => ({
       id: motherboard.id,
       name: motherboard.name,
+      price: motherboard.price,
       type: 'Płyta główna', // Dodajemy pole "type", aby odróżnić płyty główne od CPU
     })),
     ...cpus.map((cpu) => ({
       id: cpu.id,
       name: cpu.name,
+      price: cpu.price,
       type: 'Procesor', // Dodajemy pole "type", aby odróżnić CPU od płyt głównych
     })),
     ...rams.map((ram) => ({
       id: ram.id,
       name: ram.name,
+      price: ram.price,
       type: 'RAM', // Dodajemy pole "type", aby odróżnić RAM od płyt głównych i CPU
     })),
   ];
@@ -56,7 +59,6 @@ router.post("/shoppingList/new", jsonParser, (req, res) => {
     res.status(200).json(req.body);
   }, 1000);
 });
-
 
 router.delete("/shoppingList/:shoppingListId", jsonParser, (req, res) => {
   setTimeout(() => {

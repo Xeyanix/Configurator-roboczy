@@ -62,6 +62,7 @@ function ProductList() {
         `http://localhost:9000/products/shoppingList`
       );
       dispatch(loadCartList(shoppingListResponse.data));
+      
       dispatch(setProductsLoadingState("success"));
 
 
@@ -83,6 +84,9 @@ function ProductList() {
     }
   };
 
+  
+
+
   return (
     <div className={styles.App}>
       <header className={styles.AppHeader}>
@@ -95,7 +99,7 @@ function ProductList() {
               <div className={styles.productsListNames} key={motherboard.id}>
                 <span onClick={() => handleItemClick(motherboard)}>
 
-                  {motherboard.name}<br />
+                  {motherboard.name} - {motherboard.price}zł <br />
                   {loadingStatus === "AddingItem" && addedItemId === motherboard.id ? (
                     <CircularProgress />
                   ) : (
@@ -113,17 +117,17 @@ function ProductList() {
 
           <h3>Procesory:</h3>
           {processors.length > 0 ? (
-            processors.map((processor) => (
-              <div className={styles.productsListNames} key={processor.id}>
-                <span onClick={() => handleItemClick(processor)}>
-                  {processor.name}<br />
-                  {loadingStatus === "AddingItem" && addedItemId === processor.id ? (
+            processors.map((cpu) => (
+              <div className={styles.productsListNames} key={cpu.id}>
+                <span onClick={() => handleItemClick(cpu)}>
+                  {cpu.name} - {cpu.price}zł<br />
+                  {loadingStatus === "AddingItem" && addedItemId === cpu.id ? (
                     <CircularProgress />
                   ) : (
                     ""
                   )}
                 </span>
-                <button className={styles.myButton} onClick={() => handleItemClick(processor)}>
+                <button className={styles.myButton} onClick={() => handleItemClick(cpu)}>
                   Dodaj do koszyka
                 </button>
               </div>
@@ -137,7 +141,7 @@ function ProductList() {
             rams.map((ram) => (
               <div className={styles.productsListNames} key={ram.id}>
                 <span onClick={() => handleItemClick(ram)}>
-                  {ram.name}<br />
+                  {ram.name} - {ram.price}zł<br />
                   {loadingStatus === "AddingItem" && addedItemId === ram.id ? (
                     <CircularProgress />
                   ) : (
@@ -161,3 +165,4 @@ function ProductList() {
 export default ProductList;
 
 //nie wsyswiertla sie last viewed po klikniecu na przycisk
+// brak kaskadowego wyswietlania ze jak wybiore plyte glowna to moge wybierac  dalej 

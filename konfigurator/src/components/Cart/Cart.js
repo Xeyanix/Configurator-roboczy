@@ -5,12 +5,14 @@ import {
   loadCartList,
   setProductsLoadingState,
   clearCart,
+  setCurrentPrice,
 } from "../../redux/appSlice";
 import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
 
 function Cart() {
   const cart = useSelector((state) => state.app.cart);
+  const currentPrice = useSelector((state) => state.app.currentPrice);
   const loadingStatus = useSelector((state) => state.app.loadingStatus);
   const [deletedItemId, setdeletedItemId] = useState(0);
   const dispatch = useDispatch();
@@ -53,27 +55,43 @@ function Cart() {
   };
 
   const handleRemoveAll = async () => {
-  try {
-    dispatch(setProductsLoadingState("RemovingItem"));
-    console.log("Sending request to delete all items...");
-    const response = await axios.delete(`http://localhost:9000/products/shoppingList`);
-    console.log("Response from server:", response.data);
+    try {
+      dispatch(setProductsLoadingState("RemovingItem"));
+      console.log("Sending request to delete all items...");
+      const response = await axios.delete(`http://localhost:9000/products/shoppingList`);
+      console.log("Response from server:", response.data);
 
-    dispatch(clearCart());
-    dispatch(setProductsLoadingState("success"));
-    console.log("Cart cleared successfully.");
-  } catch (error) {
-    console.error("Error while clearing cart:", error);
-    dispatch(setProductsLoadingState("error"));
-  }
-};
-
-  
-  
-  const totalPrice = () => {
-    const Price = cart.reduce((acc, product) => acc + product.price, 0);
-    return Price.toLocaleString('pl-PL', { minimumFractionDigits: 2 });
+      dispatch(clearCart());
+      dispatch(setProductsLoadingState("success"));
+      console.log("Cart cleared successfully.");
+    } catch (error) {
+      console.error("Error while clearing cart:", error);
+      dispatch(setProductsLoadingState("error"));
+    }
   };
+
+  const formatPrice = (price) => {
+    const formattedPrice = parseFloat(price).toFixed(2);
+    return `${formattedPrice} PLN`;
+  };
+
+  const totalPrice = () => {
+    const Price = cart.reduce((acc, product) => {
+      const productPrice = parseFloat(product.price);
+      if (!isNaN(productPrice)) {
+        return acc + productPrice;
+      }
+      return acc;
+    }, 0);
+
+    // Dodajemy cenę aktualnie dodawanego produktu (jeśli istnieje)
+    if (!isNaN(parseFloat(currentPrice))) {
+      return (Price + parseFloat(currentPrice)).toFixed(2);
+    }
+
+    return Price.toFixed(2);
+  };
+
 
   const AddedItem = cart.map((product, index) => (
     <li
@@ -83,7 +101,8 @@ function Cart() {
       customTitle={`Kliknij prawym, aby usunąć`}
       title={`${product.name}`}
     >
-      {product.name}
+      {product.name} - {product.price}PLN
+
       <span onClick={() => handleItemClick(product, index)}>
         {loadingStatus === "RemovingItem" &&
           deletedItemId === product.id ? (
@@ -121,7 +140,8 @@ function Cart() {
               </button>
             </div>
           )}
-          <p id="total"> Łącznie: {totalPrice()} PLN</p>
+          <p id="total"> Łącznie: {formatPrice(totalPrice())}</p>
+
         </div>
       </header >
     </div >
