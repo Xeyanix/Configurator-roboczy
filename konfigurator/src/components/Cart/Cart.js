@@ -32,6 +32,25 @@ function Cart() {
     }
   };
 
+  const removeFromShoppingList = async (event, productId) => {
+    event.preventDefault();
+    try {
+      setdeletedItemId(productId);
+      dispatch(setProductsLoadingState("RemovingItem"));
+      await axios.delete(
+        `http://localhost:9000/products/shoppingList/${productId}`
+      );
+
+      const response = await axios.get(
+        `http://localhost:9000/products/shoppingList`
+      );
+      dispatch(loadCartList(response.data));
+      dispatch(setProductsLoadingState("success"));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const totalPrice = () => {
     const Price = cart.reduce((acc, product) => acc + product.price, 0);
     return Price.toLocaleString('pl-PL', { minimumFractionDigits: 2 });
@@ -41,8 +60,8 @@ function Cart() {
     <li
       className={styles.productsCartNames}
       key={product.id}
-      // onContextMenu={(event) => { removeFromShoppingList(event, product.id); }}
-      // customTitle={`Kliknij prawym, aby usunąć`}
+      onContextMenu={(event) => { removeFromShoppingList(event, product.id); }}
+      customTitle={`Kliknij prawym, aby usunąć`}
       title={`${product.name}`}
     >
       {product.name}
@@ -72,9 +91,7 @@ function Cart() {
               </ol>
               <button
                 className={styles.myButton}
-              // onClick={
-              //   brakujaca funckja usuwania wsyzstkich z koszyka*/
-              // }
+                onClick={() => handleItemClick()}
               >
                 Usuń wszystko
               </button>
