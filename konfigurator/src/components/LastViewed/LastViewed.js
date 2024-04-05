@@ -1,37 +1,22 @@
 import styles from '../../common/styles/LastViewed.module.scss'
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector, } from "react-redux";
 
-function LastViewed(props) {
+function LastViewed() {
+    const cart = useSelector((state) => state.app.cart);
     const [LastViewedProducts, setLastViewedProducts] = useState([]);
 
     useEffect(() => {
-        setLastViewedProducts(props.cart);
-    }, [props.cart]);
+        setLastViewedProducts(cart);
+    }, [cart]);
 
-    const countByProduct = props.cart.reduce((acc, product) => {
-        acc[product.id] = (acc[product.id] || 0) + 1;
-        return acc;
-    }, {});
-
-    const cartItems = Object.keys(countByProduct).map((productId) => {
-        const product = props.cart.find((p) => p.id === parseInt(productId));
-
-        return {
-            ...product,
-            count: countByProduct[productId]
-        };
-    });
-
-    const renderProduct = cartItems.map((product) =>
-
+    const renderProduct = cart.map((product) =>
         <li
+            className={styles.productsCartNames}
             key={product.id}
-            className={styles.productList}
+            title={`${product.name}`}
         >
-            <div>{product.name}</div>
-            <div>{product.chipset}</div>
-            {/* <div>Count: {product.count}</div> */}
-            <hr />
+            {product.name} 
         </li >
     );
 
@@ -40,15 +25,22 @@ function LastViewed(props) {
             <div className={styles.font}>
                 <header >
                     <h1>Ostatnio oglądane</h1>
-                    {props.cart.length === 0 ? (
-                        <p>Ostatnio nic nie dodawałes do koszyka</p>
-                    ) : (
-                        <div>{renderProduct}</div>
+                    <div className={styles.smallerFont}>
+                        {cart.length === 0 ? (
+                            <p className={styles.cartIsEmpty}>Ostatnio nic nie dodawałes do koszyka</p>
+                        ) : (
 
-                    )}
+                            <div className={styles.cart}>
+                                <ol className={styles.cartList}>
+
+                                    {renderProduct}
+                                </ol>
+
+                            </div>
+                        )}
+                    </div>
                 </header >
-            </div>
-
+            </div >
         </div >
     );
 }
@@ -57,6 +49,3 @@ export default LastViewed;
 
 
 
-
-
-//nie wsyswiertla sie last viewed po klikniecu na przycisk
