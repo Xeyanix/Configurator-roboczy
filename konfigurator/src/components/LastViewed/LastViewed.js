@@ -1,22 +1,17 @@
-import styles from '../../common/styles/LastViewed.module.scss'
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useSelector, } from "react-redux";
+import styles from '../../common/styles/LastViewed.module.scss'
 
 function LastViewed() {
-    const cart = useSelector((state) => state.app.cart);
-    const [LastViewedProducts, setLastViewedProducts] = useState([]);
+    const lastViewedProducts = useSelector((state) => state.app.lastViewed);
 
-    useEffect(() => {
-        setLastViewedProducts(cart);
-    }, [cart]);
-
-    const renderProduct = cart.map((product) =>
+    const renderProduct = lastViewedProducts.map((product) =>
         <li
-            className={styles.productsCartNames}
+            className={styles.productList}
             key={product.id}
             title={`${product.name}`}
         >
-            {product.name} 
+            {product.name}
         </li >
     );
 
@@ -26,13 +21,12 @@ function LastViewed() {
                 <header >
                     <h1>Ostatnio oglądane</h1>
                     <div className={styles.smallerFont}>
-                        {cart.length === 0 ? (
+                        {lastViewedProducts.length === 0 ? (
                             <p className={styles.cartIsEmpty}>Ostatnio nic nie dodawałes do koszyka</p>
                         ) : (
 
                             <div className={styles.cart}>
                                 <ol className={styles.cartList}>
-
                                     {renderProduct}
                                 </ol>
 
@@ -48,4 +42,4 @@ function LastViewed() {
 export default LastViewed;
 
 
-
+//dodaje itemy ale po usunieciu i dodaniu nowego aktualizuje liste

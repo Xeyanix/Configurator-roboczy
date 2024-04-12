@@ -30,6 +30,7 @@ function Cart() {
       );
       dispatch(loadCartList(response.data));
       dispatch(setProductsLoadingState("success"));
+      
     } catch (error) {
       console.log(error);
     }
@@ -64,6 +65,9 @@ function Cart() {
       dispatch(clearCart());
       dispatch(setProductsLoadingState("success"));
       console.log("Cart cleared successfully.");
+
+
+
     } catch (error) {
       console.error("Error while clearing cart:", error);
       dispatch(setProductsLoadingState("error"));
@@ -91,7 +95,6 @@ function Cart() {
 
     return Price.toFixed(2);
   };
-
 
   const AddedItem = cart.map((product, index) => (
     <li

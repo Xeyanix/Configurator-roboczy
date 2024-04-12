@@ -5,19 +5,23 @@ import axios from "axios";
 import {
   loadCartList,
   setProductsLoadingState,
+  addToLastViewed,
 } from "../../redux/appSlice";
 import { CircularProgress } from "@mui/material";
 import { v4 as uuidv4 } from "uuid";
 
 function ProductList() {
   const loadingStatus = useSelector((state) => state.app.loadingStatus);
-  const dispatch = useDispatch();
+  const lastViewedProducts = useSelector((state) => state.app.lastViewed);
+  const dispatch = useDispatch()
 
   const [motherboards, setMotherboards] = useState([]);
   const [processors, setProcessors] = useState([]);
   const [rams, setRAMs] = useState([]);
   const [addedItemId, setAddedItemId] = useState(0);
   const [selectedProduct, setSelectedProduct] = useState([]);
+  const [selectedMotherboard, setSelectedMotherboard] = useState(null);
+  const [selectedProcessor, setSelectedProcessor] = useState(null);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -36,6 +40,7 @@ function ProductList() {
         setRAMs(ramProducts);
 
         dispatch(setProductsLoadingState("success"));
+
       } catch (error) {
         console.log(error);
         dispatch(setProductsLoadingState("error"));
@@ -53,6 +58,7 @@ function ProductList() {
       newProduct.id = uuidv4();
 
       dispatch(setProductsLoadingState("AddingItem"));
+   
       await axios.post(
         `http://localhost:9000/products/shoppingList/new`,
         newProduct
@@ -62,16 +68,19 @@ function ProductList() {
         `http://localhost:9000/products/shoppingList`
       );
       dispatch(loadCartList(shoppingListResponse.data));
-      
       dispatch(setProductsLoadingState("success"));
-
+      dispatch(addToLastViewed(shoppingListResponse.data));
+    
 
       let endpoint = `http://localhost:9000/products`;
 
       if (product.type === 'Płyta główna') {
         endpoint = `http://localhost:9000/products/motherboards/${product.id}`;
+        setSelectedMotherboard(product); // Ustawienie wybranej płyty głównej
+        setSelectedProcessor(null); // Zresetowanie wybranego procesora
       } else if (product.type === 'Procesor') {
         endpoint = `http://localhost:9000/products/cpus/${product.id}`;
+        setSelectedProcessor(product); // Ustawienie wybranego procesora
       } else if (product.type === 'RAM') {
         endpoint = `http://localhost:9000/products/rams/${product.id}`;
       }
@@ -79,82 +88,85 @@ function ProductList() {
       const productResponse = await axios.get(endpoint);
       setSelectedProduct(productResponse.data);
 
+      
     } catch (error) {
       console.log(error);
     }
   };
 
-  
-
-
   return (
     <div className={styles.App}>
       <header className={styles.AppHeader}>
         <div className={styles.smallerFont}>
-
-
-          <h2>Wybierz płytę główną:</h2>
-          {motherboards.length > 0 ? (
-            motherboards.map((motherboard) => (
-              <div className={styles.productsListNames} key={motherboard.id}>
-                <span onClick={() => handleItemClick(motherboard)}>
-
-                  {motherboard.name} - {motherboard.price}zł <br />
-                  {loadingStatus === "AddingItem" && addedItemId === motherboard.id ? (
-                    <CircularProgress />
-                  ) : (
-                    ""
-                  )}
-                </span>
-                <button className={styles.myButton} onClick={() => handleItemClick(motherboard)}>
-                  Dodaj do koszyka
-                </button>
-              </div>
-            ))
+          {selectedProcessor ? (
+            <>
+              <h2>Wybierz moduł RAM dla {selectedProcessor.name}:</h2>
+              {rams.length > 0 ? (
+                rams.map((ram) => (
+                  <div className={styles.productsListNames} key={ram.id}>
+                    <span onClick={() => handleItemClick(ram)}>
+                      {ram.name} - {ram.price}zł<br />
+                      {loadingStatus === "AddingItem" && addedItemId === ram.id ? (
+                        <CircularProgress />
+                      ) : (
+                        ""
+                      )}
+                    </span>
+                    <button className={styles.myButton} onClick={() => handleItemClick(ram)}>
+                      Dodaj do koszyka
+                    </button>
+                  </div>
+                ))
+              ) : (
+                <p>Loading RAM...</p>
+              )}
+            </>
+          ) : selectedMotherboard ? (
+            <>
+              <h2>Wybierz procesor dla {selectedMotherboard.name}:</h2>
+              {processors.length > 0 ? (
+                processors.map((cpu) => (
+                  <div className={styles.productsListNames} key={cpu.id}>
+                    <span onClick={() => handleItemClick(cpu)}>
+                      {cpu.name} - {cpu.price}zł<br />
+                      {loadingStatus === "AddingItem" && addedItemId === cpu.id ? (
+                        <CircularProgress />
+                      ) : (
+                        ""
+                      )}
+                    </span>
+                    <button className={styles.myButton} onClick={() => handleItemClick(cpu)}>
+                      Dodaj do koszyka
+                    </button>
+                  </div>
+                ))
+              ) : (
+                <p>Loading processors...</p>
+              )}
+            </>
           ) : (
-            <p>Loading motherboards...</p>
-          )}
-
-          <h3>Procesory:</h3>
-          {processors.length > 0 ? (
-            processors.map((cpu) => (
-              <div className={styles.productsListNames} key={cpu.id}>
-                <span onClick={() => handleItemClick(cpu)}>
-                  {cpu.name} - {cpu.price}zł<br />
-                  {loadingStatus === "AddingItem" && addedItemId === cpu.id ? (
-                    <CircularProgress />
-                  ) : (
-                    ""
-                  )}
-                </span>
-                <button className={styles.myButton} onClick={() => handleItemClick(cpu)}>
-                  Dodaj do koszyka
-                </button>
-              </div>
-            ))
-          ) : (
-            <p>Loading processors...</p>
-          )}
-
-          <h3>Moduły RAM:</h3>
-          {rams.length > 0 ? (
-            rams.map((ram) => (
-              <div className={styles.productsListNames} key={ram.id}>
-                <span onClick={() => handleItemClick(ram)}>
-                  {ram.name} - {ram.price}zł<br />
-                  {loadingStatus === "AddingItem" && addedItemId === ram.id ? (
-                    <CircularProgress />
-                  ) : (
-                    ""
-                  )}
-                </span>
-                <button className={styles.myButton} onClick={() => handleItemClick(ram)}>
-                  Dodaj do koszyka
-                </button>
-              </div>
-            ))
-          ) : (
-            <p>Loading RAM...</p>
+            <>
+              <h2>Wybierz płytę główną:</h2>
+              {motherboards.length > 0 ? (
+                motherboards.map((motherboard) => (
+                  <div className={styles.productsListNames} key={motherboard.id}>
+                    <span onClick={() => handleItemClick(motherboard)}>
+                      {motherboard.name} - {motherboard.price}zł <br />
+                      {loadingStatus === "AddingItem" && addedItemId === motherboard.id ? (
+                        <CircularProgress />
+                      ) : (
+                        ""
+                      )}
+                    </span>
+                    <button className={styles.myButton} onClick={() => handleItemClick(motherboard)}>
+                      Dodaj do koszyka
+                    </button>
+                  </div>
+                ))
+              ) : (
+                <p>Loading motherboards...</p>
+              )}
+            </>
           )}
         </div>
       </header>
@@ -163,6 +175,3 @@ function ProductList() {
 }
 
 export default ProductList;
-
-//nie wsyswiertla sie last viewed po klikniecu na przycisk
-// brak kaskadowego wyswietlania ze jak wybiore plyte glowna to moge wybierac  dalej 

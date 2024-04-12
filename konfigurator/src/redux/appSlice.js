@@ -4,8 +4,9 @@ export const appSlice = createSlice({
     name: "app",
     initialState: {
         productsList: [],
-        filteredProducts: [], // Dodane pole na przefiltrowane produkty
+        filteredProducts: [],
         cart: [],
+        lastViewed: [],
         loadingStatus: "initial",
         currentPrice: null,
     },
@@ -31,7 +32,9 @@ export const appSlice = createSlice({
         setCurrentPrice: (state, action) => {
             state.currentPrice = action.payload;
         },
-
+        addToLastViewed: (state, action) => {
+            state.lastViewed = action.payload;
+        }
     },
 });
 
@@ -40,8 +43,9 @@ export const {
     loadCartList,
     setProductsLoadingState,
     clearCart,
-    filterProducts, 
+    filterProducts,
     setCurrentPrice,
+    addToLastViewed,
 } = appSlice.actions;
 
 export default appSlice.reducer;
