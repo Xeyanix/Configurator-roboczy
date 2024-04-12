@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
 import styles from './App.module.scss';
-import Filters from './components/Filters/Filters';
+// import Filters from './components/Filters/Filters';
 import ResponsiveAppBar from './components/ResponsiveAppBar/ResponsiveAppBar';
 import DownMenu from './components/DownMenu/DownMenu';
-import Motherboards from './common/consts/motherboard';
 import Contact from './components/Contact/Contact';
 import { AuthProvider, useAuth } from './context/Context';
 import Header from "./components/Header/Header";
 import Dashboard from './components/Dashboard/Dashboard';
 
 function App() {
-  const [selectedMotherboard] = useState(Motherboards);
-  const [setMotherboardsToDisplay] = useState(selectedMotherboard);
+  // const [selectedMotherboard] = useState(Motherboards);
+  // const [setMotherboardsToDisplay] = useState(selectedMotherboard);
   const { loggedInUser } = useAuth();
 
   return (
@@ -22,10 +21,10 @@ function App() {
             loggedInUser={loggedInUser}
           />
           <Header />
-          <Filters
+          {/* <Filters
             Motherboards={Motherboards}
             sendfilteredProductsToAppComponent={setMotherboardsToDisplay}
-          />
+          /> */}
           <div className={styles.columnsWrapper}>
             <Dashboard />
           </div>
