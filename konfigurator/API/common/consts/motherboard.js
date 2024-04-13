@@ -6,7 +6,7 @@ const motherboards = [
     memoryType: 'DDR4',
     memorySlots: 4,
     chipset: 'Intel Z590',
-    price: 499.99,
+    price: "499.99",
   },
   {
     id: 2,

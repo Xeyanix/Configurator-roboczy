@@ -8,7 +8,7 @@ export const appSlice = createSlice({
         cart: [],
         lastViewed: [],
         loadingStatus: "initial",
-        currentPrice: null,
+        currentPrice: [],
     },
     reducers: {
         loadProducts: (state, action) => {
@@ -16,6 +16,7 @@ export const appSlice = createSlice({
         },
         loadCartList: (state, action) => {
             state.cart = action.payload;
+            
         },
         setProductsLoadingState: (state, action) => {
             state.loadingStatus = action.payload;

@@ -109,7 +109,7 @@ $color-red: red;
   cursor: pointer;
   position: relative;
   // border: 1px solid #ccc;
-
+ 
   &::after {
     content: attr(customTitle);
     position: absolute;

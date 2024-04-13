@@ -7,7 +7,7 @@ let motherboardslist = require("../common/consts/motherboard.js");
 let cpu = require("../common/consts/cpu");
 let ram = require("../common/consts/ram");
 let ssd = require("../common/consts/ssd.js");
-let charger = require("../common/consts/charger"); 
+let charger = require("../common/consts/charger");
 let gpu = require("../common/consts/gpu")
 let Case = require("../common/consts/Case.js");
 
@@ -39,33 +39,33 @@ router.get("/", (req, res) => {
       id: ram.id,
       name: ram.name,
       price: ram.price,
-      type: 'RAM', 
+      type: 'RAM',
     })),
     ...ssds.map((ssd) => ({
       id: ssd.id,
       name: ssd.name,
       price: ssd.price,
-      type: 'SSD', 
+      type: 'SSD',
     })),
     ...chargers.map((charger) => ({
       id: charger.id,
       name: charger.name,
       price: charger.price,
-      type: 'Charger', 
+      type: 'Charger',
     })),
     ...gpus.map((gpu) => ({
       id: gpu.id,
       name: gpu.name,
       price: gpu.price,
-      type: 'GPU', 
+      type: 'GPU',
     })),
     ...cases.map((Case) => ({
       id: Case.id,
       name: Case.name,
       price: Case.price,
-      type: 'Cases', 
+      type: 'Cases',
     })),
-    
+
   ];
 
   res.status(200).json(allComponents);
@@ -80,7 +80,7 @@ router.get("/shoppingList", (req, res) => {
     res
       .status(200)
       .json(
-        plainList.map((product) => ({ id: product.id, name: product.name }))
+        plainList.map((product) => ({ id: product.id, name: product.name, price: product.price }))//tu dodajemy dodatkowe rzeczy w tablicy produktow
       );
   }, 1000);
 });
@@ -103,7 +103,7 @@ router.delete("/shoppingList", (req, res) => {
   setTimeout(() => {
     res.status(200).json({ message: "All products removed from shopping list" });
   }, 1000);
-  
+
 });
 
 router.post("/new", jsonParser, (req, res) => {

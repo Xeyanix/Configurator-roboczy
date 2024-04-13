@@ -102,6 +102,7 @@ function ProductList() {
           setSelectedCharger(null);
           setSelectedGPU(null);
           setSelectedCase(null);
+          setSelectedProduct(product);
           break;
         case "Procesor":
           endpoint = `http://localhost:9000/products/cpus/${product.id}`;
@@ -111,6 +112,7 @@ function ProductList() {
           setSelectedCharger(null);
           setSelectedGPU(null);
           setSelectedCase(null);
+          setSelectedProduct(product);
           break;
         case "RAM":
           endpoint = `http://localhost:9000/products/rams/${product.id}`;
@@ -118,6 +120,7 @@ function ProductList() {
           setSelectedSSD(null);
           setSelectedCharger(null);
           setSelectedCase(null);
+          setSelectedProduct(product);
           break;
         case "SSD":
           endpoint = `http://localhost:9000/products/ssds/${product.id}`;
@@ -125,21 +128,25 @@ function ProductList() {
           setSelectedCharger(null);
           setSelectedGPU(null);
           setSelectedCase(null);
+          setSelectedProduct(product);
           break;
         case "Charger":
           endpoint = `http://localhost:9000/products/chargers/${product.id}`;
           setSelectedCharger(product);
           setSelectedGPU(null);
           setSelectedCase(null);
+          setSelectedProduct(product);
           break;
         case "GPU":
           endpoint = `http://localhost:9000/products/gpus/${product.id}`;
           setSelectedGPU(product);
           setSelectedCase(null);
+          setSelectedProduct(product);
           break;
         case "Cases":
           endpoint = `http://localhost:9000/products/cases/${product.id}`;
           setSelectedCase(product);
+          setSelectedProduct(product);
           break;
         default:
           break;
@@ -147,6 +154,9 @@ function ProductList() {
 
       const productResponse = await axios.get(endpoint);
       setSelectedProduct(productResponse.data);
+
+
+
     } catch (error) {
       console.log(error);
     }
@@ -218,37 +228,32 @@ function ProductList() {
       <header className={styles.AppHeader}>
         <div className={styles.smallerFont}>
 
-          {selectedProduct && (
+          {/* {selectedProduct && (
             <div className={styles.productDetail}>
-              <h2>Wybrany porudkt</h2>
+              <h2>Wybrany produkt:</h2>
               <h2>{selectedProduct.name}</h2>
               <p>{selectedProduct.description}</p>
               <p>Cena: {selectedProduct.price}zł</p>
-
             </div>
-          )}
+          )} */}
 
-          {loadingStatus === "Loading" && <CircularProgress />}
-
-          {loadingStatus === "error" && <p>Wystąpił błąd podczas ładowania produktów.</p>}
 
 
           {selectedCase ? (
             <>
-              <h2>Wybrana obudowa: {selectedCase.name}</h2>
               <button className={styles.myButton} onClick={() => handleBackTo("Cases")}>
                 Wróć do listy obudów
               </button>
               <br />
               <h2>Podsumowanie:</h2>
               <ul>
-                <li>Płyta główna: {selectedMotherboard.name}</li>
-                <li>Procesor: {selectedProcessor.name}</li>
-                <li>Ram: {selectedRAM.name}</li>
-                <li>SSD: {selectedSSD.name}</li>
-                <li>Zasilacz: {selectedCharger.name}</li>
-                <li>GPU: {selectedGPU.name}</li>
-                <li>Obudowa: {selectedCase.name}</li>
+                <li>Płyta główna: {selectedMotherboard.name} - {selectedMotherboard.price} zł</li>
+                <li>Procesor: {selectedProcessor.name} - {selectedProcessor.price} zł</li>
+                <li>Ram: {selectedRAM.name} - {selectedRAM.price} zł</li>
+                <li>SSD: {selectedSSD.name} - {selectedSSD.price} zł</li>
+                <li>Zasilacz: {selectedCharger.name} - {selectedCharger.price} zł</li>
+                <li>GPU: {selectedGPU.name} - {selectedGPU.price} zł</li>
+                <li>Obudowa: {selectedCase.name} - {selectedCase.price} zł</li>
               </ul>
               <button className={styles.myButton} onClick={handleRebuild}>
                 Złóż komputer ponownie
@@ -306,8 +311,6 @@ function ProductList() {
               ) : (
                 <p>Loading Cases...</p>
               )}
-
-
             </>
           ) : selectedCharger ? (
             <>
@@ -356,8 +359,6 @@ function ProductList() {
               ) : (
                 <p>Loading Case...</p>
               )}
-
-
             </>
           ) : selectedSSD ? (
             <>
@@ -401,8 +402,6 @@ function ProductList() {
               ) : (
                 <p>Loading Chargers...</p>
               )}
-
-
             </>
           ) : selectedRAM ? (
             <>
@@ -441,8 +440,6 @@ function ProductList() {
               ) : (
                 <p>Loading SSDs...</p>
               )}
-
-
             </>
           ) : selectedProcessor ? (
             <>
@@ -476,8 +473,6 @@ function ProductList() {
               ) : (
                 <p>Loading RAMs...</p>
               )}
-
-
             </>
           ) : selectedMotherboard ? (
             <>
@@ -531,6 +526,8 @@ function ProductList() {
               )}
             </>
           )}
+
+
         </div>
       </header>
     </div>

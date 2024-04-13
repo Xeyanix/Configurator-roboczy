@@ -1,25 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../../common/styles/Columns.module.scss";
 import { useSelector, useDispatch } from "react-redux";
 import {
   loadCartList,
   setProductsLoadingState,
   clearCart,
-  setCurrentPrice,
 } from "../../redux/appSlice";
 import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
 
 function Cart() {
   const cart = useSelector((state) => state.app.cart);
-  const currentPrice = useSelector((state) => state.app.currentPrice);
   const loadingStatus = useSelector((state) => state.app.loadingStatus);
-  const [deletedItemId, setdeletedItemId] = useState(0);
+  const [deletedItemId, setDeletedItemId] = useState(0);
   const dispatch = useDispatch();
 
   const handleItemClick = async (product) => {
     try {
-      setdeletedItemId(product.id);
+      setDeletedItemId(product.id);
       dispatch(setProductsLoadingState("RemovingItem"));
       await axios.delete(
         `http://localhost:9000/products/shoppingList/${product.id}`
@@ -30,7 +28,7 @@ function Cart() {
       );
       dispatch(loadCartList(response.data));
       dispatch(setProductsLoadingState("success"));
-      
+
     } catch (error) {
       console.log(error);
     }
@@ -39,7 +37,7 @@ function Cart() {
   const removeFromShoppingList = async (event, productId) => {
     event.preventDefault();
     try {
-      setdeletedItemId(productId);
+      setDeletedItemId(productId);
       dispatch(setProductsLoadingState("RemovingItem"));
       await axios.delete(
         `http://localhost:9000/products/shoppingList/${productId}`
@@ -66,37 +64,13 @@ function Cart() {
       dispatch(setProductsLoadingState("success"));
       console.log("Cart cleared successfully.");
 
-
-
     } catch (error) {
       console.error("Error while clearing cart:", error);
       dispatch(setProductsLoadingState("error"));
     }
   };
 
-  const formatPrice = (price) => {
-    const formattedPrice = parseFloat(price).toFixed(2);
-    return `${formattedPrice} PLN`;
-  };
-
-  const totalPrice = () => {
-    const Price = cart.reduce((acc, product) => {
-      const productPrice = parseFloat(product.price);
-      if (!isNaN(productPrice)) {
-        return acc + productPrice;
-      }
-      return acc;
-    }, 0);
-
-    // Dodajemy cenę aktualnie dodawanego produktu (jeśli istnieje)
-    if (!isNaN(parseFloat(currentPrice))) {
-      return (Price + parseFloat(currentPrice)).toFixed(2);
-    }
-
-    return Price.toFixed(2);
-  };
-
-  const AddedItem = cart.map((product, index) => (
+  const AddedItem = cart.map((product) => (
     <li
       className={styles.productsCartNames}
       key={product.id}
@@ -104,22 +78,23 @@ function Cart() {
       customTitle={`Kliknij prawym, aby usunąć`}
       title={`${product.name}`}
     >
-      {product.name} - {product.price}PLN
+      <div className={styles.productInfo}>
+        {product.name} - {product.price} zł
 
-      <span onClick={() => handleItemClick(product, index)}>
-        {loadingStatus === "RemovingItem" &&
-          deletedItemId === product.id ? (
-          <CircularProgress />
-        ) : (
-          ""
-        )}
-      </span>
-      <button
-        className={styles.myButton}
-        onClick={() => handleItemClick(product, index)}
-      >
-        Usuń
-      </button >
+        <span onClick={() => handleItemClick(product)}>
+          {loadingStatus === "RemovingItem" && deletedItemId === product.id ? (
+            <CircularProgress />
+          ) : (
+            ""
+          )}
+        </span>
+        <button
+          className={styles.myButton}
+          onClick={() => handleItemClick(product)}
+        >
+          Usuń
+        </button>
+      </div>
     </li >
   ));
 
@@ -143,15 +118,11 @@ function Cart() {
               </button>
             </div>
           )}
-          <p id="total"> Łącznie: {formatPrice(totalPrice())}</p>
-
+        
         </div>
-      </header >
-    </div >
+      </header>
+    </div>
   );
 }
 
 export default Cart;
-
-
-
