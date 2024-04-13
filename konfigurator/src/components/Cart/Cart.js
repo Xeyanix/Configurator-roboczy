@@ -13,7 +13,11 @@ function Cart() {
   const cart = useSelector((state) => state.app.cart);
   const loadingStatus = useSelector((state) => state.app.loadingStatus);
   const [deletedItemId, setDeletedItemId] = useState(0);
+ 
   const dispatch = useDispatch();
+
+  const totalPrice = cart.reduce((total, product) => total + product.price, 0);
+ 
 
   const handleItemClick = async (product) => {
     try {
@@ -110,12 +114,15 @@ function Cart() {
               <ol className={styles.cartList}>
                 {AddedItem}
               </ol>
-              <button
-                className={styles.myButton}
-                onClick={handleRemoveAll}
-              >
-                Usuń wszystko
-              </button>
+              <div>
+                <p>Łącznie {totalPrice} zł</p>
+                <button
+                  className={styles.myButton}
+                  onClick={handleRemoveAll}
+                >
+                  Usuń wszystko
+                </button>
+              </div>
             </div>
           )}
         
