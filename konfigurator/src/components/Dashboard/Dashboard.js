@@ -2,14 +2,13 @@ import React, { useState, useEffect } from 'react';
 import ProductList from "../ProductList/ProductList";
 import Cart from "../Cart/Cart";
 import styles from "../../App.module.scss"
-import Motherboards from '../../common/consts/motherboard';
 import { useAuth } from '../../context/Context';
 import LastViewed from '../LastViewed/LastViewed';
 
 function Dashboard() {
   const [cart, setCart] = useState([]);
-  const [selectedMotherboard, setSelectedMotherboard] = useState(Motherboards);
-  const [MotherboardsToDisplay] = useState(selectedMotherboard);
+  // const [selectedMotherboard, setSelectedMotherboard] = useState(Motherboards);
+  // const [MotherboardsToDisplay] = useState(selectedMotherboard);
   const [scrollPosition] = useState(0);
   const { login, loggedInUser } = useAuth();
   const [listViewed, setListViewed] = useState([]); // Użyj osobnego stanu dla listy ostatnio oglądanych
@@ -27,7 +26,7 @@ function Dashboard() {
 
   const addToCart = (product) => {
     setCart((prevCart) => [...prevCart, product]);
-    setSelectedMotherboard((prev) => [...prev, product]);
+    // setSelectedMotherboard((prev) => [...prev, product]);
     setListViewed((prev) => [...prev, product]);
   };
 
@@ -49,7 +48,7 @@ function Dashboard() {
     <div className={styles.appWrapper}>
       <div className={styles.columnsWrapper}>
         <ProductList
-          Motherboards={MotherboardsToDisplay}
+          // Motherboards={MotherboardsToDisplay}
           dodawanie={addToCart} />
         <Cart
           cart={cart}

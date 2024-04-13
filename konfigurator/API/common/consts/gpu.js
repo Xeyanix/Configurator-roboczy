@@ -81,5 +81,4 @@ const graphicsCards = [
     },
 ];
 
-export default graphicsCards;
-
+module.exports = graphicsCards;

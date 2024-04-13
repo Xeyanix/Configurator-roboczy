@@ -6,13 +6,20 @@ var jsonParser = bodyParser.json();
 let motherboardslist = require("../common/consts/motherboard.js");
 let cpu = require("../common/consts/cpu");
 let ram = require("../common/consts/ram");
+let ssd = require("../common/consts/ssd.js");
+let charger = require("../common/consts/charger"); 
+let gpu = require("../common/consts/gpu")
+let Case = require("../common/consts/Case.js");
 
 let shoppingList = [];
 
 let motherboards = motherboardslist;
 let cpus = cpu;
 let rams = ram;
-
+let ssds = ssd;
+let chargers = charger;
+let gpus = gpu;
+let cases = Case;
 
 router.get("/", (req, res) => {
   const allComponents = [
@@ -32,8 +39,33 @@ router.get("/", (req, res) => {
       id: ram.id,
       name: ram.name,
       price: ram.price,
-      type: 'RAM', // Dodajemy pole "type", aby odróżnić RAM od płyt głównych i CPU
+      type: 'RAM', 
     })),
+    ...ssds.map((ssd) => ({
+      id: ssd.id,
+      name: ssd.name,
+      price: ssd.price,
+      type: 'SSD', 
+    })),
+    ...chargers.map((charger) => ({
+      id: charger.id,
+      name: charger.name,
+      price: charger.price,
+      type: 'Charger', 
+    })),
+    ...gpus.map((gpu) => ({
+      id: gpu.id,
+      name: gpu.name,
+      price: gpu.price,
+      type: 'GPU', 
+    })),
+    ...cases.map((Case) => ({
+      id: Case.id,
+      name: Case.name,
+      price: Case.price,
+      type: 'Cases', 
+    })),
+    
   ];
 
   res.status(200).json(allComponents);
@@ -101,10 +133,49 @@ router.get("/rams/:id", (req, res) => {
   res.status(200).json(selectedRam);
 });
 
+router.get("/ssds/:id", (req, res) => {
+  const ssdId = req.params.id;
+  const selectedSSD = ssds.find(
+    (ssd) => ssd.id === parseInt(ssdId)
+  );
+  if (!selectedSSD) {
+    return res.status(404).json({ error: "SSD not found" });
+  }
+  res.status(200).json(selectedSSD);
+});
 
+router.get("/chargers/:id", (req, res) => {
+  const chargerId = req.params.id;
+  const selectedCharger = chargers.find(
+    (charger) => charger.id === parseInt(chargerId)
+  );
+  if (!selectedCharger) {
+    return res.status(404).json({ error: "Charger not found" });
+  }
+  res.status(200).json(selectedCharger);
+});
 
+router.get("/gpus/:id", (req, res) => {
+  const gpuId = req.params.id;
+  const selectedGPU = gpus.find(
+    (gpu) => gpu.id === parseInt(gpuId)
+  );
+  if (!selectedGPU) {
+    return res.status(404).json({ error: "Charger not found" });
+  }
+  res.status(200).json(selectedGPU);
+});
 
-
+router.get("/cases/:id", (req, res) => {
+  const caseId = req.params.id;
+  const selectedCase = cases.find(
+    (Case) => Case.id === parseInt(caseId)
+  );
+  if (!selectedCase) {
+    return res.status(404).json({ error: "Case not found" });
+  }
+  res.status(200).json(selectedCase);
+});
 
 router.get("/:id", (req, res) => {
   const motherboardId = req.params.id;

@@ -50,4 +50,4 @@ const powerSupplies = [
     price: 349
   }
 ];
-export default powerSupplies;
+module.exports = powerSupplies;

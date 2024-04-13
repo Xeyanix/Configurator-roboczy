@@ -18,10 +18,20 @@ function ProductList() {
   const [motherboards, setMotherboards] = useState([]);
   const [processors, setProcessors] = useState([]);
   const [rams, setRAMs] = useState([]);
+  const [ssds, setSSDs] = useState([]);
+  const [chargers, setChargers] = useState([]);
+  const [gpus, setGpus] = useState([]);
+  const [cases, setCases] = useState([]);
   const [addedItemId, setAddedItemId] = useState(0);
   const [selectedProduct, setSelectedProduct] = useState([]);
   const [selectedMotherboard, setSelectedMotherboard] = useState(null);
   const [selectedProcessor, setSelectedProcessor] = useState(null);
+  const [selectedRAM, setSelectedRAM] = useState(null);
+  const [selectedSSD, setSelectedSSD] = useState(null);
+  const [selectedCharger, setSelectedCharger] = useState(null);
+  const [selectedGPU, setSelectedGPU] = useState(null);
+  const [selectedCase, setSelectedCase] = useState(null);
+  const [isComputerBuilt, setIsComputerBuilt] = useState(false);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -30,20 +40,21 @@ function ProductList() {
         const response = await axios.get("http://localhost:9000/products");
         const allProducts = response.data;
 
-        // Filtrujemy produkty na trzy kategorie: płyty główne, procesory i RAM
-        const motherboardProducts = allProducts.filter(
-          (product) => product.type === "Płyta główna"
-        );
-        const processorProducts = allProducts.filter(
-          (product) => product.type === "Procesor"
-        );
-        const ramProducts = allProducts.filter(
-          (product) => product.type === "RAM"
-        );
+        const motherboardProducts = filterProductsByType(allProducts, "Płyta główna");
+        const processorProducts = filterProductsByType(allProducts, "Procesor");
+        const ramProducts = filterProductsByType(allProducts, "RAM");
+        const ssdProducts = filterProductsByType(allProducts, "SSD");
+        const chargerProducts = filterProductsByType(allProducts, "Charger");
+        const gpuProducts = filterProductsByType(allProducts, "GPU");
+        const caseProducts = filterProductsByType(allProducts, "Cases");
 
         setMotherboards(motherboardProducts);
         setProcessors(processorProducts);
         setRAMs(ramProducts);
+        setCases(caseProducts);
+        setChargers(chargerProducts);
+        setGpus(gpuProducts);
+        setSSDs(ssdProducts);
 
         dispatch(setProductsLoadingState("success"));
       } catch (error) {
@@ -54,6 +65,10 @@ function ProductList() {
 
     fetchProducts();
   }, [dispatch]);
+
+  const filterProductsByType = (products, type) => {
+    return products.filter((product) => product.type === type);
+  };
 
   const handleItemClick = async (product) => {
     try {
@@ -77,15 +92,57 @@ function ProductList() {
 
       let endpoint = `http://localhost:9000/products`;
 
-      if (product.type === "Płyta główna") {
-        endpoint = `http://localhost:9000/products/motherboards/${product.id}`;
-        setSelectedMotherboard(product); // Ustawienie wybranej płyty głównej
-        setSelectedProcessor(null); // Zresetowanie wybranego procesora
-      } else if (product.type === "Procesor") {
-        endpoint = `http://localhost:9000/products/cpus/${product.id}`;
-        setSelectedProcessor(product); // Ustawienie wybranego procesora
-      } else if (product.type === "RAM") {
-        endpoint = `http://localhost:9000/products/rams/${product.id}`;
+      switch (product.type) {
+        case "Płyta główna":
+          endpoint = `http://localhost:9000/products/motherboards/${product.id}`;
+          setSelectedMotherboard(product);
+          setSelectedProcessor(null);
+          setSelectedRAM(null);
+          setSelectedSSD(null);
+          setSelectedCharger(null);
+          setSelectedGPU(null);
+          setSelectedCase(null);
+          break;
+        case "Procesor":
+          endpoint = `http://localhost:9000/products/cpus/${product.id}`;
+          setSelectedProcessor(product);
+          setSelectedRAM(null);
+          setSelectedSSD(null);
+          setSelectedCharger(null);
+          setSelectedGPU(null);
+          setSelectedCase(null);
+          break;
+        case "RAM":
+          endpoint = `http://localhost:9000/products/rams/${product.id}`;
+          setSelectedRAM(product);
+          setSelectedSSD(null);
+          setSelectedCharger(null);
+          setSelectedCase(null);
+          break;
+        case "SSD":
+          endpoint = `http://localhost:9000/products/ssds/${product.id}`;
+          setSelectedSSD(product);
+          setSelectedCharger(null);
+          setSelectedGPU(null);
+          setSelectedCase(null);
+          break;
+        case "Charger":
+          endpoint = `http://localhost:9000/products/chargers/${product.id}`;
+          setSelectedCharger(product);
+          setSelectedGPU(null);
+          setSelectedCase(null);
+          break;
+        case "GPU":
+          endpoint = `http://localhost:9000/products/gpus/${product.id}`;
+          setSelectedGPU(product);
+          setSelectedCase(null);
+          break;
+        case "Cases":
+          endpoint = `http://localhost:9000/products/cases/${product.id}`;
+          setSelectedCase(product);
+          break;
+        default:
+          break;
       }
 
       const productResponse = await axios.get(endpoint);
@@ -95,129 +152,382 @@ function ProductList() {
     }
   };
 
-  const handleBackToMotherboard = () => {
-    setSelectedMotherboard(null);
-    setSelectedProcessor(null);
-    setSelectedProduct([]);
+  const handleBackTo = (type) => {
+    switch (type) {
+      case "Motherboard":
+        setSelectedMotherboard(null);
+        setSelectedProcessor(null);
+        setSelectedRAM(null);
+        setSelectedSSD(null);
+        setSelectedCharger(null);
+        setSelectedGPU(null);
+        setSelectedCase(null);
+        setSelectedProduct([]);
+        break;
+      case "Procesor":
+        setSelectedProcessor(null);
+        setSelectedRAM(null);
+        setSelectedSSD(null);
+        setSelectedCharger(null);
+        setSelectedGPU(null);
+        setSelectedCase(null);
+        setSelectedProduct([]);
+        break;
+      case "RAM":
+        setSelectedRAM(null);
+        setSelectedSSD(null);
+        setSelectedCharger(null);
+        setSelectedGPU(null);
+        setSelectedCase(null);
+        setSelectedProduct([]);
+        break;
+      case "SSD":
+        setSelectedSSD(null);
+        setSelectedCharger(null);
+        setSelectedGPU(null);
+        setSelectedCase(null);
+        setSelectedProduct([]);
+        break;
+      case "Charger":
+        setSelectedCharger(null);
+        setSelectedGPU(null);
+        setSelectedCase(null);
+        setSelectedProduct([]);
+        break;
+      case "GPU":
+        setSelectedGPU(null);
+        setSelectedCase(null);
+        setSelectedProduct([]);
+        break;
+      case "Cases":
+        setSelectedCase(null);
+        setSelectedProduct([]);
+        break;
+      default:
+        break;
+    }
   };
 
-  const handleBackToProcessor = () => {
-    setSelectedMotherboard([]);
-    setSelectedProcessor(null);
-    setSelectedProduct(null);
+  const handleRebuild = () => {
+    setIsComputerBuilt(false);
+    handleBackTo("Motherboard");
   };
 
   return (
     <div className={styles.App}>
       <header className={styles.AppHeader}>
         <div className={styles.smallerFont}>
-          {selectedProcessor ? (
+
+          {selectedProduct && (
+            <div className={styles.productDetail}>
+              <h2>Wybrany porudkt</h2>
+              <h2>{selectedProduct.name}</h2>
+              <p>{selectedProduct.description}</p>
+              <p>Cena: {selectedProduct.price}zł</p>
+
+            </div>
+          )}
+
+          {loadingStatus === "Loading" && <CircularProgress />}
+
+          {loadingStatus === "error" && <p>Wystąpił błąd podczas ładowania produktów.</p>}
+
+
+          {selectedCase ? (
+            <>
+              <h2>Wybrana obudowa: {selectedCase.name}</h2>
+              <button className={styles.myButton} onClick={() => handleBackTo("Cases")}>
+                Wróć do listy obudów
+              </button>
+              <br />
+              <h2>Podsumowanie:</h2>
+              <ul>
+                <li>Płyta główna: {selectedMotherboard.name}</li>
+                <li>Procesor: {selectedProcessor.name}</li>
+                <li>Ram: {selectedRAM.name}</li>
+                <li>SSD: {selectedSSD.name}</li>
+                <li>Zasilacz: {selectedCharger.name}</li>
+                <li>GPU: {selectedGPU.name}</li>
+                <li>Obudowa: {selectedCase.name}</li>
+              </ul>
+              <button className={styles.myButton} onClick={handleRebuild}>
+                Złóż komputer ponownie
+              </button>
+            </>
+          ) : selectedGPU ? (
             <>
               <h2>Wybrana płyta główna: {selectedMotherboard.name}</h2>
-              <button
-                className={styles.myButton}
-                onClick={handleBackToMotherboard}
-              >
+              <button className={styles.myButton} onClick={() => handleBackTo("Motherboard")}>
                 Wróć do listy płyt głównych
               </button>
 
               <h3>Wybrany procesor: {selectedProcessor.name}</h3>
-              <button
-                className={styles.myButton}
-                onClick={handleBackToProcessor}
-              >
+              <button className={styles.myButton} onClick={() => handleBackTo("Processor")}>
                 Wróć do wyboru procesora
               </button>
-              <h3>Wybierz moduł RAM:</h3>
+
+              <h3>Wybrany RAM: {selectedRAM.name}</h3>
+              <button className={styles.myButton} onClick={() => handleBackTo("RAM")}>
+                Wróć do wyboru RAM
+              </button>
+
+              <h3>Wybrany SSD: {selectedSSD.name}</h3>
+              <button className={styles.myButton} onClick={() => handleBackTo("SSD")}>
+                Wróć do wyboru SSD
+              </button>
+
+              <h3>Wybrany Charger: {selectedCharger.name}</h3>
+              <button className={styles.myButton} onClick={() => handleBackTo("Charger")}>
+                Wróć do wyboru Charger
+              </button>
+
+              <h3>Wybrany GPU: {selectedGPU.name}</h3>
+              <button className={styles.myButton} onClick={() => handleBackTo("GPU")}>
+                Wróć do wyboru GPU
+              </button>
+
+              <h3>Wybierz obudowę:</h3>
+              {cases.length > 0 ? (
+                cases.map((Case) => (
+                  <div className={styles.productsListNames} key={Case.id}>
+                    <span onClick={() => handleItemClick(Case)}>
+                      {Case.name} - {Case.price}zł<br />
+                      {loadingStatus === "AddingItem" && addedItemId === Case.id ? (
+                        <CircularProgress />
+                      ) : (
+                        ""
+                      )}
+                    </span>
+                    <button className={styles.myButton} onClick={() => handleItemClick(Case)}>
+                      Dodaj do koszyka
+                    </button>
+                  </div>
+                ))
+              ) : (
+                <p>Loading Cases...</p>
+              )}
+
+
+            </>
+          ) : selectedCharger ? (
+            <>
+              <h2>Wybrana płyta główna: {selectedMotherboard.name}</h2>
+              <button className={styles.myButton} onClick={() => handleBackTo("Motherboard")}>
+                Wróć do listy płyt głównych
+              </button>
+
+              <h3>Wybrany procesor: {selectedProcessor.name}</h3>
+              <button className={styles.myButton} onClick={() => handleBackTo("Processor")}>
+                Wróć do wyboru procesora
+              </button>
+
+              <h3>Wybrany RAM: {selectedRAM.name}</h3>
+              <button className={styles.myButton} onClick={() => handleBackTo("RAM")}>
+                Wróć do wyboru RAM
+              </button>
+
+              <h3>Wybrany SSD: {selectedSSD.name}</h3>
+              <button className={styles.myButton} onClick={() => handleBackTo("SSD")}>
+                Wróć do wyboru SSD
+              </button>
+
+              <h3>Wybrany Charger: {selectedCharger.name}</h3>
+              <button className={styles.myButton} onClick={() => handleBackTo("Charger")}>
+                Wróć do wyboru Charger
+              </button>
+
+              <h3>Wybierz GPU:</h3>
+              {gpus.length > 0 ? (
+                gpus.map((gpu) => (
+                  <div className={styles.productsListNames} key={gpu.id}>
+                    <span onClick={() => handleItemClick(gpu)}>
+                      {gpu.name} - {gpu.price}zł<br />
+                      {loadingStatus === "AddingItem" && addedItemId === gpu.id ? (
+                        <CircularProgress />
+                      ) : (
+                        ""
+                      )}
+                    </span>
+                    <button className={styles.myButton} onClick={() => handleItemClick(gpu)}>
+                      Dodaj do koszyka
+                    </button>
+                  </div>
+                ))
+              ) : (
+                <p>Loading Case...</p>
+              )}
+
+
+            </>
+          ) : selectedSSD ? (
+            <>
+              <h2>Wybrana płyta główna: {selectedMotherboard.name}</h2>
+              <button className={styles.myButton} onClick={() => handleBackTo("Motherboard")}>
+                Wróć do listy płyt głównych
+              </button>
+
+              <h3>Wybrany procesor: {selectedProcessor.name}</h3>
+              <button className={styles.myButton} onClick={() => handleBackTo("Processor")}>
+                Wróć do wyboru procesora
+              </button>
+
+              <h3>Wybrany RAM: {selectedRAM.name}</h3>
+              <button className={styles.myButton} onClick={() => handleBackTo("RAM")}>
+                Wróć do wyboru RAM
+              </button>
+
+              <h3>Wybrany SSD: {selectedSSD.name}</h3>
+              <button className={styles.myButton} onClick={() => handleBackTo("SSD")}>
+                Wróć do wyboru SSD
+              </button>
+
+              <h3>Wybierz Charger:</h3>
+              {chargers.length > 0 ? (
+                chargers.map((charger) => (
+                  <div className={styles.productsListNames} key={charger.id}>
+                    <span onClick={() => handleItemClick(charger)}>
+                      {charger.name} - {charger.price}zł<br />
+                      {loadingStatus === "AddingItem" && addedItemId === charger.id ? (
+                        <CircularProgress />
+                      ) : (
+                        ""
+                      )}
+                    </span>
+                    <button className={styles.myButton} onClick={() => handleItemClick(charger)}>
+                      Dodaj do koszyka
+                    </button>
+                  </div>
+                ))
+              ) : (
+                <p>Loading Chargers...</p>
+              )}
+
+
+            </>
+          ) : selectedRAM ? (
+            <>
+              <h2>Wybrana płyta główna: {selectedMotherboard.name}</h2>
+              <button className={styles.myButton} onClick={() => handleBackTo("Motherboard")}>
+                Wróć do listy płyt głównych
+              </button>
+
+              <h3>Wybrany procesor: {selectedProcessor.name}</h3>
+              <button className={styles.myButton} onClick={() => handleBackTo("Processor")}>
+                Wróć do wyboru procesora
+              </button>
+
+              <h3>Wybrany RAM: {selectedRAM.name}</h3>
+              <button className={styles.myButton} onClick={() => handleBackTo("RAM")}>
+                Wróć do wyboru RAM
+              </button>
+
+              <h3>Wybierz SSD:</h3>
+              {ssds.length > 0 ? (
+                ssds.map((ssd) => (
+                  <div className={styles.productsListNames} key={ssd.id}>
+                    <span onClick={() => handleItemClick(ssd)}>
+                      {ssd.name} - {ssd.price}zł<br />
+                      {loadingStatus === "AddingItem" && addedItemId === ssd.id ? (
+                        <CircularProgress />
+                      ) : (
+                        ""
+                      )}
+                    </span>
+                    <button className={styles.myButton} onClick={() => handleItemClick(ssd)}>
+                      Dodaj do koszyka
+                    </button>
+                  </div>
+                ))
+              ) : (
+                <p>Loading SSDs...</p>
+              )}
+
+
+            </>
+          ) : selectedProcessor ? (
+            <>
+              <h2>Wybrana płyta główna: {selectedMotherboard.name}</h2>
+              <button className={styles.myButton} onClick={() => handleBackTo("Motherboard")}>
+                Wróć do listy płyt głównych
+              </button>
+
+              <h3>Wybrany procesor: {selectedProcessor.name}</h3>
+              <button className={styles.myButton} onClick={() => handleBackTo("Procesor")}>
+                Wróć do wyboru procesora
+              </button>
+
+              <h3>Wybierz RAM:</h3>
               {rams.length > 0 ? (
                 rams.map((ram) => (
                   <div className={styles.productsListNames} key={ram.id}>
                     <span onClick={() => handleItemClick(ram)}>
                       {ram.name} - {ram.price}zł<br />
-                      {loadingStatus === "AddingItem" &&
-                        addedItemId === ram.id ? (
+                      {loadingStatus === "AddingItem" && addedItemId === ram.id ? (
                         <CircularProgress />
                       ) : (
                         ""
                       )}
                     </span>
-                    <button
-                      className={styles.myButton}
-                      onClick={() => handleItemClick(ram)}
-                    >
+                    <button className={styles.myButton} onClick={() => handleItemClick(ram)}>
                       Dodaj do koszyka
                     </button>
                   </div>
                 ))
               ) : (
-                <p>Loading RAM...</p>
+                <p>Loading RAMs...</p>
               )}
+
 
             </>
           ) : selectedMotherboard ? (
             <>
               <h2>Wybrana płyta główna: {selectedMotherboard.name}</h2>
-              <button
-                className={styles.myButton}
-                onClick={handleBackToMotherboard}
-              >
+              <button className={styles.myButton} onClick={() => handleBackTo("Motherboard")}>
                 Wróć do listy płyt głównych
               </button>
-              <h3>Wybierz procesor: </h3>
+
+              <h3>Wybierz procesor:</h3>
               {processors.length > 0 ? (
-                processors.map((cpu) => (
-                  <div className={styles.productsListNames} key={cpu.id}>
-                    <span onClick={() => handleItemClick(cpu)}>
-                      {cpu.name} - {cpu.price}zł<br />
-                      {loadingStatus === "AddingItem" &&
-                        addedItemId === cpu.id ? (
+                processors.map((processor) => (
+                  <div className={styles.productsListNames} key={processor.id}>
+                    <span onClick={() => handleItemClick(processor)}>
+                      {processor.name} - {processor.price}zł<br />
+                      {loadingStatus === "AddingItem" && addedItemId === processor.id ? (
                         <CircularProgress />
                       ) : (
                         ""
                       )}
                     </span>
-                    <button
-                      className={styles.myButton}
-                      onClick={() => handleItemClick(cpu)}
-                    >
+                    <button className={styles.myButton} onClick={() => handleItemClick(processor)}>
                       Dodaj do koszyka
                     </button>
                   </div>
                 ))
               ) : (
-                <p>Loading processors...</p>
+                <p>Loading Processors...</p>
               )}
-
             </>
           ) : (
             <>
               <h2>Wybierz płytę główną:</h2>
-              
               {motherboards.length > 0 ? (
                 motherboards.map((motherboard) => (
-                  <div
-                    className={styles.productsListNames}
-                    key={motherboard.id}
-                  >
+                  <div className={styles.productsListNames} key={motherboard.id}>
                     <span onClick={() => handleItemClick(motherboard)}>
-                      {motherboard.name} - {motherboard.price}zł <br />
-                      {loadingStatus === "AddingItem" &&
-                        addedItemId === motherboard.id ? (
+                      {motherboard.name} - {motherboard.price}zł<br />
+                      {loadingStatus === "AddingItem" && addedItemId === motherboard.id ? (
                         <CircularProgress />
                       ) : (
                         ""
                       )}
                     </span>
-                    <button
-                      className={styles.myButton}
-                      onClick={() => handleItemClick(motherboard)}
-                    >
+                    <button className={styles.myButton} onClick={() => handleItemClick(motherboard)}>
                       Dodaj do koszyka
                     </button>
                   </div>
                 ))
               ) : (
-                <p>Loading motherboards...</p>
+                <p>Loading Motherboards...</p>
               )}
             </>
           )}
