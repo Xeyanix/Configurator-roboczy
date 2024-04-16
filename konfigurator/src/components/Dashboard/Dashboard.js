@@ -71,5 +71,3 @@ function Dashboard() {
 }
 
 export default Dashboard;
-
-//nie wsyswiertla sie last viewed po klikniecu na przycisk

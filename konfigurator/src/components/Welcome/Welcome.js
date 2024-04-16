@@ -7,6 +7,7 @@ import Contact from '../Contact/Contact';
 import { AppBar, Toolbar, IconButton, Drawer, List, ListItem, ListItemText } from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 function Welcome() {
     const [drawerOpen, setDrawerOpen] = useState(false);
@@ -36,13 +37,12 @@ function Welcome() {
     };
 
     const projectsData = [
+        { title: "Tworzenie stron Internetowych", description: "Sprawdź", buttonText: "Stwórz swoją stronę" },
+        { title: "Konfigurator PC", description: "Zbuduj swój komputer", buttonText: "Konfigurator" },
+        { title: "Składanie Komputerów", description: "Sprawdź", buttonText: "Projekt 3" },
+        { title: "Tworzenie stron Internetowych", description: "Sprawdź", buttonText: "Stwórz swoją stronę" },
         { title: "CV", description: "Znajdź wszystkie informacje o mnie.", buttonText: "CV Page" },
-        { title: "Konfigurator", description: "Przejrzyj mój projekt konfiguratora.", buttonText: "Konfigurator" },
-        { title: "Projekt 3", description: "Przejrzyj mój projekt 3.", buttonText: "Projekt 3" },
-        { title: "Projekt 4", description: "Przejrzyj mój projekt 4.", buttonText: "Projekt 4" },
-        { title: "Projekt 5", description: "Przejrzyj mój projekt 5.", buttonText: "Show Page" },
     ];
-
 
     const menuItems = [
         { label: "Projekty", path: "Projects" },
@@ -52,7 +52,6 @@ function Welcome() {
     const BarItems = [
         { label: "Projekty", path: "Projects" },
         { label: "Kontakt", path: "Contact" },
-
     ];
 
     return (
@@ -151,12 +150,8 @@ function Welcome() {
                     </List>
                 </Drawer>
                 <header className={styles.header}>
-                    <h1>Moje Portfolio !</h1>
+                    <h1>Oferta</h1>
                 </header>
-
-                <div className={styles.additionalText}>
-                    Tu znajdują się moje projekty
-                </div>
 
                 <section id="projectSection" className={styles.projects}>
                     {projectsData.map((project, index) => (
@@ -187,7 +182,7 @@ function Welcome() {
 
             <footer className={styles.footer}>
                 <div className={styles.downMenu}>
-                    <p className={styles.copyrightText}>
+                    <p className={styles.copyrigthText}>
                         &copy; {new Date().getFullYear()}{' '}
                         <Link to="/MainPage" >
                             Configurator
@@ -217,7 +212,7 @@ function Welcome() {
                             </Button>
                         </ScrollLink>
                         <Button onClick={scrollToTop} variant="contained" color="success">
-                            Do góry
+                            <KeyboardArrowUpIcon />
                         </Button>
                     </div>
                 </div>

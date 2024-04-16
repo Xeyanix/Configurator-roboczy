@@ -30,12 +30,12 @@ function Header(props) {
     <div className={styles.headerWrapper}>
       <div className={styles.signedUserInfo}>
 
-        <Button
+        {/* <Button
           variant="contained"
           onClick={() => getProductsFromAPI("products")}
         >
           Załaduj produkty
-        </Button>
+        </Button> */}
       </div>
     </div>
   );
