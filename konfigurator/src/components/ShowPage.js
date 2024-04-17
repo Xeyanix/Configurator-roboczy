@@ -11,7 +11,7 @@ function ShowPage() {
             <div className={styles.container}>
                 <Link to="/">
                     <Button variant="contained">
-                        Welcome Page
+                        Strona Główna
                     </Button>
                 </Link>
                 <Viewer />

@@ -1,64 +1,113 @@
-import React, { useState } from 'react';
-import Button from "@mui/material/Button";
+import React, { useState, useEffect } from "react";
 import styles from "../common/styles/Footer.module.scss";
 import { Link } from 'react-router-dom';
-
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleUp } from "@fortawesome/free-solid-svg-icons";
 
 function Footer() {
-    const [setScrollPosition] = useState(0);
-
-
+    const [goUp, setGoUp] = useState(false);
 
     const scrollToTop = () => {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-        setScrollPosition(0);
+        window.scrollTo({ top: 0, behavior: "smooth" });
     };
 
+    useEffect(() => {
+        const onPageScroll = () => {
+            if (window.scrollY > 600) {
+                setGoUp(true);
+            } else {
+                setGoUp(false);
+            }
+        };
+        window.addEventListener("scroll", onPageScroll);
 
-    const scrollToContactSection = () => {
-        const contactSection = document.getElementById("contactSection");
-        if (contactSection) {
-            const contactSectionPosition = contactSection.offsetTop;
-            window.scrollTo({
-                top: contactSectionPosition,
-                behavior: "smooth",
-            });
-        }
-    };
+        return () => {
+            window.removeEventListener("scroll", onPageScroll);
+        };
+    }, []);
 
     return (
         <footer className={styles.footer}>
-            <div id="contactSection" className={styles.contactSection}>
-                <div >
-
-
-                    <div className={styles.buttonsContainer}>
-                        <Link to="/MainPage">
-                            <Button variant="contained" color="error">
-                                Strona Główna
-                            </Button>
-                        </Link>
-                        <Link to="/LoginPage">
-                            <Button variant="contained">
-                                Zaloguj
-                            </Button>
-                        </Link>
-                        <Button onClick={scrollToContactSection} variant="contained" color="secondary">
-                            Kontakt
-                        </Button>
-                        <Button onClick={scrollToTop} variant="contained" color="success">
-                            Do góry
-                        </Button>
+            <div className={styles.footerContainer}>
+                <div>
+                    <div>
+                        <p className={styles.footerTitle}>
+                            WebTune <span className={styles.ftSign}>+</span>
+                        </p>
+                        <p className={styles.ftDescription}>
+                            Tworzymy strony internetowe.
+                            Nasze projekty nie są jedynie statycznymi obrazami w sieci, to dynamiczne narzędzia, które skutecznie przyciągną klienta.
+                            <p>  </p>
+                            Jesteśmy ekspertami w budowaniu komputerów dostosowanych do Twoich potrzeb.
+                            Nasz konfigurator, pozwala na stworzenie idealnej maszyny do pracy, gier czy projektowania.
+                            Zapewniamy nie tylko komputery, lecz także doświadczenie i wsparcie podczas ich budowy oraz przez cały okres użytkowania.
+                        </p>
                     </div>
+
+                    {/* <SubscribeNewsletter /> */}
                 </div>
 
+                <div>
+                    <p className={styles.footerListTitle}>Nasza Firma</p>
+                    <ul className={styles.footerListItems}>
+                        <li>
+                            <a href="#services">Strona Główna</a>
+                        </li>
+                        <li>
+                            <a href="#services">O nas</a>
+                        </li>
+                        <li>
+                            <a href="#services">Oferta</a>
+                        </li>
+                        <li>
+                            <a href="#services">Realizacje</a>
+                        </li>
+                        <li>
+                            <a href="#services">Kontakt</a>
+                        </li>
+                    </ul>
+                </div>
 
+                <div>
+                    <p className={styles.footerListTitle}>Usługi</p>
+                    <ul className={styles.footerListItems}>
+                        <li>
+                            <Link to={"/legal"}>Strony internetowe</Link>
+                        </li>
+                        <li>
+                            <Link to={"/legal"}>Składanie Komputera</Link>
+                        </li>
+                        <li>
+                            <Link to={"/legal"}>Konfigurator PC</Link>
+                        </li>
+                        <li>
+                            <Link to={"/legal"}>Polityka Prywatności</Link>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <p className={styles.footerListTitle}>Kontakt</p>
+                    <ul className={styles.footerListItems}>
+                        <li>
+                            <a href="mailto:support@healthplus.com">biuro@webtune.pl</a>
+                        </li>
+                        <li>
+                            <a href="tel:+022 5454 5252">+48 513 513 513 </a>
+                        </li>
+                        <li>
+                            <p className={styles.footerListTitle}> Godziny otwarcia </p>
+                        </li>
+                        <li>
+                            <a>
+                                9<sup>00</sup> - 18<sup>00</sup>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div className={styles.downMenu}>
+
+            <div className={styles.contactSection}>
                 <p className={styles.copyrightText}>
                     <Link to="/MainPage" >
                         Configurator
@@ -114,13 +163,20 @@ function Footer() {
                                     fill="#000000"
                                     xmlns="http://www.w3.org/2000/svg"
                                     height="1em"
-                                    viewBox="0 0 24 24" 
+                                    viewBox="0 0 24 24"
                                 >
                                     <path d="m16 12v-.001c0-2.209-1.791-4-4-4s-4 1.791-4 4 1.791 4 4 4c1.104 0 2.104-.448 2.828-1.171.723-.701 1.172-1.682 1.172-2.768 0-.021 0-.042-.001-.063v.003zm2.16 0c-.012 3.379-2.754 6.114-6.135 6.114-3.388 0-6.135-2.747-6.135-6.135s2.747-6.135 6.135-6.135c1.694 0 3.228.687 4.338 1.797 1.109 1.08 1.798 2.587 1.798 4.256 0 .036 0 .073-.001.109v-.005zm1.687-6.406v.002c0 .795-.645 1.44-1.44 1.44s-1.44-.645-1.44-1.44.645-1.44 1.44-1.44c.398 0 .758.161 1.018.422.256.251.415.601.415.988v.029-.001zm-7.84-3.44-1.195-.008q-1.086-.008-1.649 0t-1.508.047c-.585.02-1.14.078-1.683.17l.073-.01c-.425.07-.802.17-1.163.303l.043-.014c-1.044.425-1.857 1.237-2.272 2.254l-.01.027c-.119.318-.219.695-.284 1.083l-.005.037c-.082.469-.14 1.024-.159 1.589l-.001.021q-.039.946-.047 1.508t0 1.649.008 1.195-.008 1.195 0 1.649.047 1.508c.02.585.078 1.14.17 1.683l-.01-.073c.07.425.17.802.303 1.163l-.014-.043c.425 1.044 1.237 1.857 2.254 2.272l.027.01c.318.119.695.219 1.083.284l.037.005c.469.082 1.024.14 1.588.159l.021.001q.946.039 1.508.047t1.649 0l1.188-.024 1.195.008q1.086.008 1.649 0t1.508-.047c.585-.02 1.14-.078 1.683-.17l-.073.01c.425-.07.802-.17 1.163-.303l-.043.014c1.044-.425 1.857-1.237 2.272-2.254l.01-.027c.119-.318.219-.695.284-1.083l.005-.037c.082-.469.14-1.024.159-1.588l.001-.021q.039-.946.047-1.508t0-1.649-.008-1.195.008-1.195 0-1.649-.047-1.508c-.02-.585-.078-1.14-.17-1.683l.01.073c-.07-.425-.17-.802-.303-1.163l.014.043c-.425-1.044-1.237-1.857-2.254-2.272l-.027-.01c-.318-.119-.695-.219-1.083-.284l-.037-.005c-.469-.082-1.024-.14-1.588-.159l-.021-.001q-.946-.039-1.508-.047t-1.649 0zm11.993 9.846q0 3.578-.08 4.953c.005.101.009.219.009.337 0 3.667-2.973 6.64-6.64 6.64-.119 0-.237-.003-.354-.009l.016.001q-1.375.08-4.953.08t-4.953-.08c-.101.005-.219.009-.337.009-3.667 0-6.64-2.973-6.64-6.64 0-.119.003-.237.009-.354l-.001.016q-.08-1.375-.08-4.953t.08-4.953c-.005-.101-.009-.219-.009-.337 0-3.667 2.973-6.64 6.64-6.64.119 0 .237.003.354.009l-.016-.001q1.375-.08 4.953-.08t4.953.08c.101-.005.219-.009.337-.009 3.667 0 6.64 2.973 6.64 6.64 0 .119-.003.237-.009.354l.001-.016q.08 1.374.08 4.953z" /></svg>
                             </a>
                         </li>
                     </ul>
                 </div>
+            </div>
+            <div
+                onClick={scrollToTop}
+                className={`${styles.scroll_up} ${goUp ? styles.showScroll : ""}`}
+                title="Lnik kierujący na początek strony"
+            >
+                <FontAwesomeIcon icon={faAngleUp} />
 
             </div>
         </footer >

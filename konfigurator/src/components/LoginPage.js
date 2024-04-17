@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import { useAuth } from "../context/Context";
 import Alert from '@mui/material/Alert';
 import CheckIcon from '@mui/icons-material/Check';
+import Footer from "./Footer";
 
 function LoginPage() {
   let navigate = useNavigate();
@@ -22,10 +23,9 @@ function LoginPage() {
     login(fullName);
     console.log(`Zalogowany jako: ${userfirstName} ${userLastName}`);
 
-    
-  setUserFirstName(""); // Czyszczenie stanu
-  setUserLastName(""); // Czyszczenie stanu
-  
+    setUserFirstName(""); // Czyszczenie stanu
+    setUserLastName(""); // Czyszczenie stanu
+
     setTimeout(() => {
       setShowLoginMessage(true);
       setTimeout(() => {
@@ -68,8 +68,11 @@ function LoginPage() {
             Zaloguj się
           </Button>
         </Box>
+        <Link to="/">
+          <Button variant="contained">Strona Główna</Button>
+        </Link>
         <Link to="/configurator">
-          <Button variant="contained">powrót</Button>
+          <Button variant="contained">Konfigurator</Button>
         </Link>
       </form>
 
@@ -80,6 +83,8 @@ function LoginPage() {
           </Alert>
         </div>
       )}
+
+      <Footer />
     </div>
   );
 }

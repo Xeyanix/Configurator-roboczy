@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from '../common/styles/Columns.module.scss';
 import { Link, useNavigate } from 'react-router-dom';
-import { AppBar, Toolbar, IconButton, Snackbar, Typography, Drawer, List, ListItem, ListItemText } from "@mui/material";
+import { AppBar, Toolbar, IconButton, Snackbar, Drawer, List, ListItem, ListItemText } from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { useAuth } from "../context/Context";
@@ -46,43 +46,53 @@ function ResponsiveAppBar() {
     }
   };
 
-  const menuItems = [
-    { label: "Witaj !", path: "/" },
-    { label: "Strona Główna", path: "/MainPage" },
+  const scrollToProjectSection = () => {
+    const projectSection = document.getElementById("projectSection");
+    if (projectSection) {
+      const projecttSectionPosition = projectSection.offsetTop;
+      window.scrollTo({
+        top: projecttSectionPosition,
+        behavior: "smooth",
+      });
+    }
+  };
+  const BarItems = [
+    { label: "Strona Główna", path: "/" },
+    { label: "O nas", path: "" },
+    { label: "Oferta", onClick: scrollToProjectSection  },
+    { label: "Realizacje", path: "" },
+    { label: "Konfiguruj !", path: "/MainPage" },
     { label: "Zaloguj", path: "/LoginPage" },
     { label: "Konto", path: "/UserPage", onClick: handleKontoClick },
     { label: "Kontakt", onClick: scrollToContactSection },
   ];
 
-  const BarItems = [
-    { label: "Witaj !", path: "/" },
-    { label: "Strona Główna", path: "/MainPage" },
+  const menuItems = [
+    { label: "Strona Główna", path: "/" },
+    { label: "O nas", path: "" },
+    { label: "Oferta", onClick: scrollToProjectSection  },
+    { label: "Realizacje", path: "" },
+    { label: "Konfiguruj !", path: "/MainPage" },
     { label: "Zaloguj", path: "/LoginPage" },
     { label: "Konto", path: "/UserPage", onClick: handleKontoClick },
     { label: "Kontakt", onClick: scrollToContactSection },
   ];
+
+
 
   return (
     <div>
+
       <AppBar position="static">
         <Toolbar className={styles.wrapper}>
-          <Typography
-            variant="h4"
-            noWrap
-            component={Link}
-            to="/MainPage"
-            sx={{
-              mr: 0,
-              display: { md: 'flex' },
-              fontFamily: 'monospace',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            PC Configurator
-          </Typography>
+
 
           <div className={styles.otherPageButtons}>
+            <h3 className="navbar-title">
+              <Link to="/">
+                WebTune <span className="navbar-sign">+</span>
+              </Link>
+            </h3>
             <IconButton
               edge="start"
               color="inherit"
@@ -90,19 +100,22 @@ function ResponsiveAppBar() {
               onClick={toggleDrawer(true)}
             >
               <MenuIcon />
+
             </IconButton>
 
             {BarItems.map((item, index) => (
               item.label && (
-                <MenuItem
-                  button
-                  key={index}
-                  component={item.path ? Link : "button"}
-                  to={item.path}
-                  onClick={item.onClick}
-                >
-                  <ListItemText primary={item.label} />
-                </MenuItem>
+               
+                    <MenuItem
+                      button
+                      key={index}
+                      component={item.path ? Link : "button"}
+                      to={item.path}
+                      onClick={item.onClick}
+                    >
+                      <ListItemText primary={item.label} />
+                    </MenuItem>
+              
               )
             ))}
 

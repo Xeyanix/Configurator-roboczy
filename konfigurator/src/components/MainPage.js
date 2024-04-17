@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 import Box from "@mui/material/Box";
 import styles from "../common/styles/MainPage.module.scss";
 import { useLocation } from "react-router-dom";
-
+import ResponsiveAppBar from "./ResponsiveAppBar";
+import Footer from './Footer';
 
 function MainPage() {
   const { state } = useLocation();
@@ -22,6 +23,7 @@ function MainPage() {
 
   return (
     <div>
+      <ResponsiveAppBar />
       <div className={styles.mainContainer}>
         <div className={styles.maintext}>
           <h1 className={styles.mainHeading}>Witaj w Konfiguratorze Swojego komputera - PC</h1>
@@ -147,24 +149,10 @@ function MainPage() {
         </div>
       </div>
 
+      <div id="contactSection">
+        <Footer />
 
-      <footer className={styles.footer}>
-        <div className={styles.downMenu}>
-          <p className={styles.copyrightText}>
-            &copy; {new Date().getFullYear()}{' '}
-            <Link to="/MainPage" onClick={scrollToTop} >
-              Configurator
-            </Link>
-            . All rights reserved.
-          </p>
-
-          <div className={styles.buttonsContainer}>
-            <Button onClick={scrollToTop} variant="contained" color="success" className={styles.buttonInFooter}>
-              Do góry
-            </Button>
-          </div>
-        </div>
-      </footer>
+      </div>
 
 
     </div>

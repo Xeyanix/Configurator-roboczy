@@ -1,25 +1,18 @@
 import React, { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import styles from "../common/styles/WelcomePage.module.scss";
-import { Link } from 'react-router-dom';
-import { Link as ScrollLink } from 'react-scroll';
+import { Link, useNavigate } from 'react-router-dom';
 import Footer from './Footer';
-import { AppBar, Toolbar, IconButton, Drawer, List, ListItem, ListItemText } from "@mui/material";
-import MenuIcon from '@mui/icons-material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleUp } from "@fortawesome/free-solid-svg-icons";
+import ResponsiveAppBar from "./ResponsiveAppBar";
 
 function Welcome() {
-    const [drawerOpen, setDrawerOpen] = useState(false);
-    const [goUp, setGoUp] = useState(false);
+    const [openSnackbar, setOpenSnackbar] = useState(true);
+    const navigate = useNavigate();
 
-    const toggleDrawer = (open) => (event) => {
-        if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-            return;
-        }
-        setDrawerOpen(open);
-    };
+    useEffect(() => {
+        setOpenSnackbar(false);
+    }, [navigate]);
+
     const redirectToOrderWebsite = () => {
         window.location.href = "/OrderWebsite";
     }
@@ -36,24 +29,6 @@ function Welcome() {
         window.location.href = "/MainPage";
     }
 
-    const scrollToTop = () => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-    };
-
-    useEffect(() => {
-        const onPageScroll = () => {
-            if (window.scrollY > 600) {
-                setGoUp(true);
-            } else {
-                setGoUp(false);
-            }
-        };
-        window.addEventListener("scroll", onPageScroll);
-
-        return () => {
-            window.removeEventListener("scroll", onPageScroll);
-        };
-    }, []);
 
     const projectsData = [
         { title: "Tworzenie stron", description: "Zamów swoją strone internetową", buttonText: "Zamów swoją stronę" },
@@ -62,21 +37,6 @@ function Welcome() {
         { title: "CV", description: "Znajdź wszystkie informacje o mnie.", buttonText: "CV Page" },
     ];
 
-    const menuItems = [
-        { label: "Strona Główna", path: "" },
-        { label: "O nas", path: "" },
-        { label: "Realizacje", path: "" },
-        { label: "Projekty", path: "Projects" },
-        { label: "Kontakt", path: "Contact" },
-    ];
-
-    const BarItems = [
-        { label: "Strona Główna", path: "" },
-        { label: "O nas", path: "" },
-        { label: "Realizacje", path: "" },
-        { label: "Projekty", path: "Projects" },
-        { label: "Kontakt", path: "Contact" },
-    ];
 
     return (
         <div>
@@ -91,103 +51,9 @@ function Welcome() {
                 </div>
                 <button class="start-button">Poproś o wycene</button>
             </div> */}
-
+            <ResponsiveAppBar />
             <main>
                 <div className={styles.MainContainer}>
-                    <AppBar position="static">
-                        <Toolbar className={styles.wrapper}>
-                            <div className={styles.otherPageButtons}>
-                                <IconButton
-                                    edge="start"
-                                    color="inherit"
-                                    aria-label="menu"
-                                    sx={{ mr: 2 }}
-                                    onClick={toggleDrawer(true)}
-                                >
-                                    <MenuIcon />
-                                </IconButton>
-                                {BarItems.map((item, index) => (
-                                    item.label && (
-                                        <div key={index}>
-                                            {item.path === 'Projects' ? (
-                                                <ScrollLink
-                                                    to="projectSection"
-                                                    smooth={true}
-                                                    duration={500}
-                                                    offset={-64}
-                                                >
-                                                    <MenuItem button component={Link}>
-                                                        <ListItemText primary={item.label} />
-                                                    </MenuItem>
-                                                </ScrollLink>
-                                            ) : item.path === 'Contact' ? (
-                                                <ScrollLink
-                                                    to="contactSection"
-                                                    smooth={true}
-                                                    duration={500}
-                                                    offset={-64}
-                                                >
-                                                    <MenuItem button component={Link}>
-                                                        <ListItemText primary={item.label} />
-                                                    </MenuItem>
-                                                </ScrollLink>
-                                            ) : (
-                                                <ScrollLink
-                                                    to={item.path}
-                                                    smooth={true}
-                                                    duration={500}
-                                                    offset={-64}
-                                                >
-                                                    <MenuItem button component={Link}>
-                                                        <ListItemText primary={item.label} />
-                                                    </MenuItem>
-                                                </ScrollLink>
-                                            )}
-                                        </div>
-                                    )
-                                ))}
-                            </div>
-                        </Toolbar>
-                    </AppBar>
-
-
-                    <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer(false)}>
-                        <List className={styles.menu}>
-                            {menuItems.map((item, index) => (
-                                item.label && (
-                                    <div key={index}>
-                                        {item.path === 'Projects' ? (
-                                            <ScrollLink
-                                                to="projectSection"
-                                                smooth={true}
-                                                duration={500}
-                                                offset={-64}
-                                            >
-                                                <ListItem button component={Link}>
-                                                    <ListItemText primary={item.label} />
-                                                </ListItem>
-                                            </ScrollLink>
-                                        ) : item.path === 'Contact' ? (
-                                            <ScrollLink
-                                                to="contactSection"
-                                                smooth={true}
-                                                duration={500}
-                                                offset={-64}
-                                            >
-                                                <ListItem button component={Link}>
-                                                    <ListItemText primary={item.label} />
-                                                </ListItem>
-                                            </ScrollLink>
-                                        ) : (
-                                            <ListItem button>
-                                                <ListItemText primary={item.label} />
-                                            </ListItem>
-                                        )}
-                                    </div>
-                                )
-                            ))}
-                        </List>
-                    </Drawer>
                     <header className={styles.header}>
                         <h1>Oferta</h1>
                     </header>
@@ -213,57 +79,12 @@ function Welcome() {
                 </div>
 
                 <div>
-                    <section id="contact">
+                    <section id="contactSection">
                         <Footer />
                     </section>
 
                 </div>
-                <div
-                    onClick={scrollToTop}
-                    className={`${styles.scroll_up} ${goUp ? styles.showScroll : ""}`}
-                    title="Lnik kierujący na początek strony"
-                >
-                    <FontAwesomeIcon icon={faAngleUp} />
-
-                </div>
-
             </main>
-
-            <footer className={styles.footer}>
-                <div className={styles.downMenu}>
-                    <p className={styles.copyrigthText}>
-                        &copy; {new Date().getFullYear()}{' '}
-                        <Link to="/MainPage" >
-                            Configurator
-                        </Link>
-                        . All rights reserved.
-                    </p>
-
-                    <div className={styles.buttonsContainer}>
-                        <ScrollLink
-                            smooth={true}
-                            duration={500}
-                            offset={-64}
-                            to="projectSection"
-                        >
-                            <Button variant="contained" color="error">
-                                Projekty
-                            </Button>
-                        </ScrollLink>
-                        <ScrollLink
-                            smooth={true}
-                            duration={500}
-                            offset={-64}
-                            to="contact"
-                        >
-                            <Button variant="contained" color="secondary">
-                                Kontakt
-                            </Button>
-                        </ScrollLink>
-
-                    </div>
-                </div>
-            </footer>
         </div>
     );
 }

@@ -7,6 +7,7 @@ import UserForm from "../components/UserForm";
 import { Navigate } from "react-router-dom";
 import Alert from '@mui/material/Alert';
 import CheckIcon from '@mui/icons-material/Check';
+import Footer from "./Footer";
 
 function UserPage() {
   const { loggedInUser, logout } = useAuth();
@@ -24,14 +25,14 @@ function UserPage() {
     return <Navigate to="/Configurator" />;
   }
 
-    const handleLogout = () => {
-      window.sessionStorage.removeItem("user");
-      logout();
-      console.log("Użytkownik został wylogowany");
-    }
+  const handleLogout = () => {
+    window.sessionStorage.removeItem("user");
+    logout();
+    console.log("Użytkownik został wylogowany");
+  }
 
-    return (
-
+  return (
+    <div>
       <div className={styles.mainContainer}>
         {loggedInUser ? (
 
@@ -68,12 +69,13 @@ function UserPage() {
             </Link>
           </div>
         )}
-
       </div>
+      <Footer />
+    </div>
 
-    );
-  }
+  );
+}
 
-  export default UserPage;
+export default UserPage;
 
 //po klikneicu powrot resetuje sie pamiec w aplikacji i nie poakzuje stanu ze ktos jest zalogowany 

@@ -19,6 +19,7 @@ function App() {
           <ResponsiveAppBar
             loggedInUser={loggedInUser}
           />
+          
           <Header />
           {/* <Filters
             Motherboards={Motherboards}
@@ -28,7 +29,7 @@ function App() {
             <Dashboard />
           </div>
         </div >
-        <footer>
+        <footer id="contactSection">
           <Footer />
         </footer>
       </div >
@@ -37,8 +38,3 @@ function App() {
 }
 
 export default App;
-
-
-//contact section - bigger and prettierxd
-//section filters to changed
-//appbar on welcome page maybe better or more usual for random people
