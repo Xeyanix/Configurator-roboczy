@@ -1,0 +1,104 @@
+.footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+  bottom: 0;
+}
+
+.downMenu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.copyrightText {
+  margin: 0;
+}
+
+.buttonsContainer {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+
+.buttonsContainer Button {
+  text-transform: none;
+}
+
+.contactSection {
+  // background-color: rgb(15, 121, 150);
+  padding: 1rem;
+}
+
+
+.h2 {
+  display: flex;
+  // background-color: #462777;
+  margin-bottom: var(--wp--preset--spacing-20);
+  text-transform: uppercase;
+  text-align: center;
+
+  // padding: 1rem;
+  // border: 1px solid black;
+  // border-radius: 5px;
+}
+
+.p {
+  display: flex;
+  margin-top: var(--wp--preset--spacing--20);
+  margin-bottom: var(--wp--preset--spacing--10);
+  text-transform: uppercase;
+  text-align: center;
+
+  // padding: 1rem;
+  // border: 1px solid black;
+  // border-radius: 2px;
+}
+
+.socialMediaLinks {
+  display: flex;
+  justify-content: center;
+  list-style-type: none;
+  align-items: center;
+  gap: 12px;
+}
+
+.socialMediaLinks li a {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #cbcdd3;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.socialMediaLinks li a svg {
+  width: 24px;
+  height: 24px;
+  padding: 1px;
+}
+
+.socialMediaLinks li a svg path {
+  fill: #cbcdd3;
+}
+
+.socialMediaLinks li a:hover,
+.ft-social-links li a:hover svg path {
+  fill: #1A8EFD;
+  border: 2px solid #1A8EFD;
+}
+
+/* Responsive */
+@media screen and (max-width: 700px) {
+
+
+
+  .socialMediaLinks {
+    margin: 16px 0 0;
+  }
+}

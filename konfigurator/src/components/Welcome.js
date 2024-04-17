@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
-import styles from "../../common/styles/WelcomePage.module.scss";
+import styles from "../common/styles/WelcomePage.module.scss";
 import { Link } from 'react-router-dom';
 import { Link as ScrollLink } from 'react-scroll';
-import Contact from '../Contact/Contact';
+import Footer from './Footer';
 import { AppBar, Toolbar, IconButton, Drawer, List, ListItem, ListItemText } from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -79,8 +79,19 @@ function Welcome() {
     ];
 
     return (
-
         <div>
+            {/* <div>
+                <img src="%PUBLIC_URL%/logo192.png" alt="WebTune Logo" width="50" height="50" />
+                <h1>WebTune</h1>
+                <div class="description">
+                    <p>Witaj w WebTune - Tworzymy nowoczesne strony internetowe
+                        W WebTune tworzymy strony internetowe, które nie tylko przyciągają uwagę dzięki nowoczesnemu designowi, ale również są zoptymalizowane pod kątem UX/UI, co zapewnia najlepsze doświadczenia dla użytkowników.
+
+                        Projektujemy strony z myślą o dostosowaniu do wszystkich urządzeń i optymalizacji SEO, co zapewnia maksymalną widoczność Twojej firmy online.</p>
+                </div>
+                <button class="start-button">Poproś o wycene</button>
+            </div> */}
+
             <main>
                 <div className={styles.MainContainer}>
                     <AppBar position="static">
@@ -138,13 +149,8 @@ function Welcome() {
                             </div>
                         </Toolbar>
                     </AppBar>
-                    <div class="description">
-                        <p>Witaj w WebTune - Tworzymy nowoczesne strony internetowe
-                            W WebTune tworzymy strony internetowe, które nie tylko przyciągają uwagę dzięki nowoczesnemu designowi, ale również są zoptymalizowane pod kątem UX/UI, co zapewnia najlepsze doświadczenia dla użytkowników.
 
-                            Projektujemy strony z myślą o dostosowaniu do wszystkich urządzeń i optymalizacji SEO, co zapewnia maksymalną widoczność Twojej firmy online.</p>
-                    </div>
-                    <button class="start-button">Poproś o wycene</button>
+
                     <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer(false)}>
                         <List className={styles.menu}>
                             {menuItems.map((item, index) => (
@@ -208,15 +214,17 @@ function Welcome() {
 
                 <div>
                     <section id="contact">
-                        <Contact />
+                        <Footer />
                     </section>
 
                 </div>
                 <div
                     onClick={scrollToTop}
                     className={`${styles.scroll_up} ${goUp ? styles.showScroll : ""}`}
+                    title="Lnik kierujący na początek strony"
                 >
                     <FontAwesomeIcon icon={faAngleUp} />
+
                 </div>
 
             </main>

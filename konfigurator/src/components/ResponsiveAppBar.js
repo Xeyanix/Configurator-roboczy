@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import styles from '../../common/styles/Columns.module.scss';
+import styles from '../common/styles/Columns.module.scss';
 import { Link, useNavigate } from 'react-router-dom';
 import { AppBar, Toolbar, IconButton, Snackbar, Typography, Drawer, List, ListItem, ListItemText } from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import { useAuth } from "../../context/Context";
+import { useAuth } from "../context/Context";
 import Alert from '@mui/material/Alert';
 import CloseIcon from '@mui/icons-material/Close';
 

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import styles from "../../common/styles/Columns.module.scss";
+import styles from "../common/styles/Columns.module.scss";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import {
   loadCartList,
   setProductsLoadingState,
   addToLastViewed,
-} from "../../redux/appSlice";
+} from "../redux/appSlice";
 import { CircularProgress } from "@mui/material";
 import { v4 as uuidv4 } from "uuid";
 

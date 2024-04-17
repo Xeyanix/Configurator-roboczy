@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from "../../common/styles/ShowPage.module.scss";
+import styles from "../common/styles/ShowPage.module.scss";
 import { Button } from '@mui/material';
 
 function Viewer() {

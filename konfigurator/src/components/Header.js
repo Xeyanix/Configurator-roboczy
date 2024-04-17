@@ -1,8 +1,8 @@
 import React from "react";
-import styles from "../../common/styles/Headers.module.scss";
+import styles from "../common/styles/Headers.module.scss";
 import { useDispatch } from "react-redux";
 import { Button } from "@mui/material";
-import { loadProducts, loadCartList } from "../../redux/appSlice";
+import { loadProducts, loadCartList } from "../redux/appSlice";
 import axios from "axios";
 
 function Header(props) {

@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, } from "react-redux";
-import styles from '../../common/styles/LastViewed.module.scss'
+import styles from '../common/styles/LastViewed.module.scss'
 
 function LastViewed() {
     const lastViewedProducts = useSelector((state) => state.app.lastViewed);

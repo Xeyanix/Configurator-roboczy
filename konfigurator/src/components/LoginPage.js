@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
-import styles from "../../common/styles/LoginPage.module.scss";
+import styles from "../common/styles/LoginPage.module.scss";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { useAuth } from "../../context/Context";
+import { useAuth } from "../context/Context";
 import Alert from '@mui/material/Alert';
 import CheckIcon from '@mui/icons-material/Check';
 

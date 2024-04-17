@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { Link } from 'react-router-dom';
 import Button from "@mui/material/Button";
-import { useAuth } from "../../context/Context";
-import styles from "../../common/styles/UserPage.module.scss";
-import UserForm from "../UserForm/UserForm";
+import { useAuth } from "../context/Context";
+import styles from "../common/styles/UserForm.module.scss";
+import UserForm from "../components/UserForm";
 import { Navigate } from "react-router-dom";
 import Alert from '@mui/material/Alert';
 import CheckIcon from '@mui/icons-material/Check';

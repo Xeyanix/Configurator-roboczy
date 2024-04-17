@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from "@mui/material/Button";
-import styles from "../../common/styles/ShowPage.module.scss";
-import Viewer from '../Viewer/Viewer';
+import styles from "../common/styles/ShowPage.module.scss";
+import Viewer from './Viewer';
 import { Link } from 'react-router-dom';
 
 

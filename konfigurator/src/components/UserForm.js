@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import styles from "../../common/styles/UserForm.module.scss"; // Make sure to have the correct import for your styles
+import styles from "../common/styles/UserForm.module.scss";
 
 function UserForm() {
     // State for form fields

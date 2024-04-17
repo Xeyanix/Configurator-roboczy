@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import styles from './App.module.scss';
 // import Filters from './components/Filters/Filters';
-import ResponsiveAppBar from './components/ResponsiveAppBar/ResponsiveAppBar';
-import DownMenu from './components/DownMenu/DownMenu';
-import Contact from './components/Contact/Contact';
+import ResponsiveAppBar from './components/ResponsiveAppBar';
+import Footer from './components/Footer';
 import { AuthProvider, useAuth } from './context/Context';
-import Header from "./components/Header/Header";
-import Dashboard from './components/Dashboard/Dashboard';
+import Header from "./components/Header";
+import Dashboard from './components/Dashboard';
 
 function App() {
   // const [selectedMotherboard] = useState(Motherboards);
@@ -28,12 +27,9 @@ function App() {
           <div className={styles.columnsWrapper}>
             <Dashboard />
           </div>
-          <div>
-            <Contact id="kontakt" />
-          </div>
         </div >
         <footer>
-          <DownMenu />
+          <Footer />
         </footer>
       </div >
     </AuthProvider>

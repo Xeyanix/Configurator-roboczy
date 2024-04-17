@@ -3,15 +3,15 @@ import ReactDOM from "react-dom";
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import LoginPage from "./components/LoginPage/LoginPage";
-import MainPage from "./components/MainPage/MainPage";
-import UserPage from "./components/UserPage/UserPage";
+import LoginPage from "./components/LoginPage";
+import MainPage from "./components/MainPage";
+import UserPage from "./components/UserPage";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import { AuthProvider } from './context/Context';
-import Welcome from './components/Welcome/Welcome';
-import ShowPage from './components/ShowPage/ShowPage';
+import Welcome from './components/Welcome';
+import ShowPage from './components/ShowPage';
 
 const router = createBrowserRouter([
   {

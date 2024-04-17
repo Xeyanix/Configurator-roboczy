@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import ProductList from "../ProductList/ProductList";
-import Cart from "../Cart/Cart";
-import styles from "../../App.module.scss"
-import { useAuth } from '../../context/Context';
-import LastViewed from '../LastViewed/LastViewed';
+import ProductList from "./ProductList";
+import Cart from "./Cart";
+import styles from "../App.module.scss"
+import { useAuth } from '../context/Context';
+import LastViewed from './LastViewed';
 
 function Dashboard() {
   const [cart, setCart] = useState([]);
