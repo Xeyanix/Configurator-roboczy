@@ -79,9 +79,9 @@ function Welcome() {
                 </div>
 
                 <div>
-                    <section id="contactSection">
+                    <div id="contactSection">
                         <Footer />
-                    </section>
+                    </div>
 
                 </div>
             </main>

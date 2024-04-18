@@ -32,9 +32,9 @@ function Footer() {
                 <div>
                     <div>
                         <p className={styles.footerTitle}>
-                            WebTune <span className={styles.ftSign}>+</span>
+                            WebTune <span className={styles.footerSign}>+</span>
                         </p>
-                        <p className={styles.ftDescription}>
+                        <p className={styles.footerDescription}>
                             Tworzymy strony internetowe.
                             Nasze projekty nie są jedynie statycznymi obrazami w sieci, to dynamiczne narzędzia, które skutecznie przyciągną klienta.
                             <p>  </p>
@@ -51,24 +51,19 @@ function Footer() {
                     <p className={styles.footerListTitle}>Nasza Firma</p>
                     <ul className={styles.footerListItems}>
                         <li>
-                            <a
-                                href="#services">
-
-                                Strona Główna
-
-                            </a>
+                            <Link to="/" onClick={scrollToTop}>Strona Główna</Link>
                         </li>
                         <li>
-                            <a href="#services">O nas</a>
+                            <Link to="/" onClick={scrollToTop}>O nas</Link>
                         </li>
                         <li>
-                            <a href="#projectSection">Oferta</a>
+                            <Link to="/" href="#projectSection" onClick={scrollToTop}>Oferta</Link>
                         </li>
+                        {/* <li>
+                            <a href="" onClick={scrollToTop}>Realizacje</a>
+                        </li> */}
                         <li>
-                            <a href="">Realizacje</a>
-                        </li>
-                        <li>
-                            <Link to="/Contact"> Kontakt</Link>
+                            <Link to="/Contact" onClick={scrollToTop}> Kontakt</Link>
                         </li>
                     </ul>
                 </div>
@@ -77,13 +72,13 @@ function Footer() {
                     <p className={styles.footerListTitle}>Usługi</p>
                     <ul className={styles.footerListItems}>
                         <li>
-                            <Link to={"/legal"}>Strony internetowe</Link>
+                            <Link to={"/legal"} onClick={scrollToTop}>Strony internetowe</Link>
                         </li>
                         <li>
-                            <Link to={"/legal"}>Składanie Komputera</Link>
+                            <Link to={"/legal"} onClick={scrollToTop}>Składanie Komputera</Link>
                         </li>
                         <li>
-                            <Link to={"/legal"}>Konfigurator PC</Link>
+                            <Link to="/configurator" onClick={scrollToTop}>Konfigurator PC</Link>
                         </li>
                         <li>
                             <Link to={"/legal"}>Polityka Prywatności</Link>
@@ -103,7 +98,7 @@ function Footer() {
 
                         <p className={styles.footerListTitle}> Godziny otwarcia </p>
 
-                        <p>
+                        <p className={styles.hours}>
                             9<sup>00</sup> - 18<sup>00</sup>
                         </p>
 
@@ -113,7 +108,7 @@ function Footer() {
 
             <div className={styles.contactSection}>
                 <p className={styles.copyrightText}>
-                    <Link to="/MainPage" >
+                    <Link to="/MainPage" onClick={scrollToTop} className={styles.copyrightText}>
                         Configurator
                     </Link>
                     {' '}&copy; {new Date().getFullYear()} |
