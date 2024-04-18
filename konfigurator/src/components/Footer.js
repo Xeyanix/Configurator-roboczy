@@ -27,7 +27,7 @@ function Footer() {
     }, []);
 
     return (
-        <footer className={styles.footer}>
+        <div className={styles.footer}>
             <div className={styles.footerContainer}>
                 <div>
                     <div>
@@ -51,19 +51,24 @@ function Footer() {
                     <p className={styles.footerListTitle}>Nasza Firma</p>
                     <ul className={styles.footerListItems}>
                         <li>
-                            <a href="#services">Strona Główna</a>
+                            <a
+                                href="#services">
+
+                                Strona Główna
+
+                            </a>
                         </li>
                         <li>
                             <a href="#services">O nas</a>
                         </li>
                         <li>
-                            <a href="#services">Oferta</a>
+                            <a href="#projectSection">Oferta</a>
                         </li>
                         <li>
-                            <a href="#services">Realizacje</a>
+                            <a href="">Realizacje</a>
                         </li>
                         <li>
-                            <a href="#services">Kontakt</a>
+                            <Link to="/Contact"> Kontakt</Link>
                         </li>
                     </ul>
                 </div>
@@ -93,16 +98,15 @@ function Footer() {
                             <a href="mailto:support@healthplus.com">biuro@webtune.pl</a>
                         </li>
                         <li>
-                            <a href="tel:+022 5454 5252">+48 513 513 513 </a>
+                            <a href="tel:+022 5454 5252">+48 123 456 789 </a>
                         </li>
-                        <li>
-                            <p className={styles.footerListTitle}> Godziny otwarcia </p>
-                        </li>
-                        <li>
-                            <a>
-                                9<sup>00</sup> - 18<sup>00</sup>
-                            </a>
-                        </li>
+
+                        <p className={styles.footerListTitle}> Godziny otwarcia </p>
+
+                        <p>
+                            9<sup>00</sup> - 18<sup>00</sup>
+                        </p>
+
                     </ul>
                 </div>
             </div>
@@ -179,7 +183,7 @@ function Footer() {
                 <FontAwesomeIcon icon={faAngleUp} />
 
             </div>
-        </footer >
+        </div >
     );
 }
 

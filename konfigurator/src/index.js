@@ -12,6 +12,7 @@ import store from "./redux/store";
 import { AuthProvider } from './context/Context';
 import Welcome from './components/Welcome';
 import ShowPage from './components/ShowPage';
+import Contact from './components/Contact';
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,11 @@ const router = createBrowserRouter([
   {
     path: "/UserPage",
     element: <UserPage />,
+
+  },
+  {
+    path: "/Contact",
+    element: <Contact />,
 
   },
  
