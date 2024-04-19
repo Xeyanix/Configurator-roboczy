@@ -4,20 +4,20 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import LoginPage from "./components/LoginPage";
-import MainPage from "./components/MainPage";
+import ConfigurePage from "./components/ConfigurePage";
 import UserPage from "./components/UserPage";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import { AuthProvider } from './context/Context';
-import Welcome from './components/Welcome';
+import MainPage from './components/MainPage';
 import ShowPage from './components/ShowPage';
 import Contact from './components/Contact';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Welcome />,
+    element: <MainPage />,
     // errorElement: <Page404 />,
   },
   {
@@ -26,8 +26,8 @@ const router = createBrowserRouter([
 
   },
   {
-    path: "/MainPage",
-    element: <MainPage />,
+    path: "/ConfigurePage",
+    element: <ConfigurePage />,
 
   },
   {
