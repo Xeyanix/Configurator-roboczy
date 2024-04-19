@@ -7,12 +7,21 @@ import MenuItem from '@mui/material/MenuItem';
 import { useAuth } from "../context/Context";
 import Alert from '@mui/material/Alert';
 import CloseIcon from '@mui/icons-material/Close';
+import Brightness7 from '@mui/icons-material/Brightness7';
+import Brightness4 from '@mui/icons-material/Brightness4';
 
 function ResponsiveAppBar() {
+  const [darkMode, setDarkMode] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const { loggedInUser } = useAuth();
   const [openSnackbar, setOpenSnackbar] = useState(true);
   const navigate = useNavigate();
+
+  const toggleDarkMode = () => {
+    console.log("toggleDarkMode called");
+    setDarkMode(!darkMode);
+    console.log("Stan darkMode po aktualizacji:", !darkMode);
+  };
 
   const toggleDrawer = (open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -59,34 +68,31 @@ function ResponsiveAppBar() {
   const BarItems = [
     { label: "Strona Główna", path: "/" },
     { label: "O nas", path: "" },
-    { label: "Oferta", onClick: scrollToProjectSection  },
+    { label: "Oferta", onClick: scrollToProjectSection },
     { label: "Realizacje", path: "" },
     { label: "Konfiguruj !", path: "/ConfigurePage" },
     { label: "Zaloguj", path: "/LoginPage" },
     { label: "Konto", path: "/UserPage", onClick: handleKontoClick },
-    { label: "Kontakt", onClick: scrollToContactSection },
+    { label: "Kontakt", path: "/Contact", onClick: scrollToContactSection },
   ];
 
   const menuItems = [
     { label: "Strona Główna", path: "/" },
     { label: "O nas", path: "" },
-    { label: "Oferta", onClick: scrollToProjectSection  },
+    { label: "Oferta", onClick: scrollToProjectSection },
     { label: "Realizacje", path: "" },
     { label: "Konfiguruj !", path: "/ConfigurePage" },
     { label: "Zaloguj", path: "/LoginPage" },
     { label: "Konto", path: "/UserPage", onClick: handleKontoClick },
-    { label: "Kontakt", onClick: scrollToContactSection },
+    { label: "Kontakt", path: "/Contact", onClick: scrollToContactSection },
   ];
 
 
 
   return (
     <div>
-
-      <AppBar position="static">
+      <AppBar position="static" className={darkMode ? styles.darkMode : styles.lightMode}>
         <Toolbar className={styles.wrapper}>
-
-
           <div className={styles.otherPageButtons}>
             <h3 className="navbar-title">
               <Link to="/">
@@ -105,20 +111,28 @@ function ResponsiveAppBar() {
 
             {BarItems.map((item, index) => (
               item.label && (
-               
-                    <MenuItem
-                      button
-                      key={index}
-                      component={item.path ? Link : "button"}
-                      to={item.path}
-                      onClick={item.onClick}
-                    >
-                      <ListItemText primary={item.label} />
-                    </MenuItem>
-              
+
+                <MenuItem
+                  button
+                  key={index}
+                  component={item.path ? Link : "button"}
+                  to={item.path}
+                  onClick={item.onClick}
+                >
+                  <ListItemText primary={item.label} />
+
+                </MenuItem>
+
               )
             ))}
-
+            <IconButton
+              edge="end"
+              color="inherit"
+              aria-label="dark mode toggle"
+              onClick={toggleDarkMode}
+            >
+              {darkMode ? <Brightness7 /> : <Brightness4 />}
+            </IconButton>
             {!loggedInUser && (
               <Snackbar
                 open={openSnackbar}

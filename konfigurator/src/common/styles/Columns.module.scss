@@ -1,4 +1,13 @@
-$color-red: red;
+
+.lightMode {
+  background-color: #ffffff; // tło w trybie jasnym
+  color: #000000; // kolor tekstu w trybie jasnym
+}
+
+.darkMode {
+  background-color: #1f1f1f; // tło w trybie ciemnym
+  color: #ffffff; // kolor tekstu w trybie ciemnym
+}
 
 .App {
   display: flex;
@@ -68,7 +77,7 @@ $color-red: red;
   align-items: center;
   font-size: calc(10px + 2vmin);
   justify-content: space-between;
-  color: $color-red;
+  color: red;
   width: 100%;
   border: 1px solid black;
   overflow-x: auto;
@@ -108,8 +117,8 @@ $color-red: red;
   color: white;
   cursor: pointer;
   position: relative;
-  // border: 1px solid #ccc;
- 
+  border: 1px solid #ccc;
+
   &::after {
     content: attr(customTitle);
     position: absolute;
