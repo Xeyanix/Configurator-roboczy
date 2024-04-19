@@ -1,6 +1,6 @@
-.box {}
-
-.container {}
+.MainContainer {
+    max-width: 100%;
+}
 
 .banner {
     display: flex;
@@ -9,7 +9,7 @@
     justify-content: center;
     padding: 12rem 0;
     text-align: center;
-    background-color: #f5b59a;
+    // background-color: #f5b59a;
 
     .banner__containerwrapper {
         display: relative;
@@ -17,7 +17,7 @@
         justify-content: space-between;
         padding: 4.8rem;
         width: 50%;
-        background-color: #a2fbdc;
+        // background-color: #a2fbdc;
 
         @media (max-width: 768px) {
             width: 80%;
@@ -71,89 +71,53 @@
 
 .contact {
     background-color: #e1f4fe;
-    padding: 12rem 0;
+    padding: 1rem;
 
     &__container {
         display: flex;
         align-items: center;
         padding: 4.8rem;
         justify-content: space-between;
-        border-radius: 4px;
+        border-radius: 100px;
         background-color: #f9f9ff;
     }
 
     &__wrapper {
         position: relative;
         clear: both;
-        width: 100%;
-        max-width: 128rem;
-        height: auto;
-        margin: 0 auto;
-    }
-
-    @media (min-width: 319px) and (max-width: 374px),
-    (min-width: 375px) and (max-width: 575px),
-    (min-width: 576px) and (max-width: 767px) {
-        .contact__container {
-            flex-direction: column;
-            width: calc(100% - 3.2rem);
-            padding: 3.6rem;
-        }
     }
 
     &__content {
-        position: relative;
+        flex-direction: column;
+
     }
 
     &__content__left {
-        display: flex;
-        flex-direction: column;
         width: 50%;
-
-        @media (min-width: 319px) and (max-width: 374px),
-        (min-width: 375px) and (max-width: 575px),
-        (min-width: 576px) and (max-width: 767px) {
-            &__content__left {
-                width: 100%;
-            }
-        }
     }
 
     &__content__right {
-        width: 41.6666666667%;
-       
-
-        @media (min-width: 319px) and (max-width: 374px),
-        (min-width: 375px) and (max-width: 575px),
-        (min-width: 576px) and (max-width: 767px) {
-            .contact__content--right {
-                width: 100%;
-            }
-        }
+        width: 35%;
     }
 
     &_text {
-
-        position: relative;
-        z-index: 3;
-        align-items: center;
-        flex-direction: column;
+        // position: relative;
+        // z-index: 3;
+        // align-items: center;
+        // flex-direction: column;
 
     }
 
     &__title {
         font-weight: bold;
         line-height: 1;
-        font-size: 4rem;
+        font-size: 2rem;
         display: flex;
     }
 
     &__caption {
-        margin-bottom: 3.6rem;
         line-height: 1.5;
-        font-size: 2rem;
     }
-
 }
 
 
@@ -162,27 +126,25 @@
 
     &_row {
         display: flex;
-        position: relative;
-        flex-wrap: wrap;
+        // position: relative;
+        // flex-wrap: wrap;
         justify-content: space-between;
-        margin-bottom: 2.4rem;
     }
 
     &_item {
         position: relative;
-        // width: calc(50% - 2.4rem);
+        width: calc(40% - 2rem);
     }
 
     &_inputField,
     &_selectField {
         position: relative;
-        padding: 2.4rem;
+        padding: 2.2rem;
         border: none;
         border-bottom: 1px solid #c8c8c8;
         outline: none;
         font-family: "Rubik", sans-serif;
-        line-height: 1.4;
-        font-size: 1.6rem;
+        font-size: 1.2rem;
         background-color: transparent;
         resize: none;
     }
@@ -190,13 +152,13 @@
     &_areaField {
         position: relative;
         width: 250%;
-        padding: 2.4rem;
+        padding: 2rem;
         border: none;
         border-bottom: 1px solid #c8c8c8;
         outline: none;
         font-family: "Rubik", sans-serif;
         line-height: 1.4;
-        font-size: 1.6rem;
+        font-size: 1.2rem;
         background-color: transparent;
         resize: none;
     }
@@ -217,25 +179,21 @@
 
     &_checkboxField {
         margin-right: 10px;
-        margin-top: 15px;
     }
 
     &_checkboxLabel {
         display: flex;
         align-items: flex-start;
-        margin-left: 0.8rem;
-        text-align: justify;
         line-height: 1.5;
-        font-size: 1.6rem;
-
+        font-size: 1rem;
     }
 
     &_submitButton {
-        padding: 2.4rem 4.8rem;
+        padding: 1.2rem 2.4rem;
         color: #fff;
         border: none;
         border-radius: 20px;
-        font-size: 1.6rem;
+        font-size: 1rem;
         transition: background-color 0.3s;
         text-transform: uppercase;
         font-weight: 700;
@@ -247,11 +205,12 @@
         letter-spacing: 2px;
         font-family: Rubik, sans-serif;
         cursor: pointer;
-        margin-left: 20px;
+        margin-top: 20px;
+        // margin-left: 20px;
     }
 
     &_submitButton:hover {
-        background-color: #0056b3;
+        background-color: #1b70ca;
 
     }
 }
@@ -259,9 +218,8 @@
 .contact__info {
 
     &_card {
-        margin-bottom: 3.6rem;
-        padding: 3.6rem;
-        background-color: #f2f2f2; // Tło karty
+        margin-bottom: 1rem;
+        padding: 2rem;
         border-radius: 20px;
     }
 
@@ -275,28 +233,21 @@
 
     &_card_content {
         display: flex;
-
-        gap: 2.4rem;
+        gap: 1rem;
     }
 
     &_card_text {
-        display: flex;
         flex-direction: column;
-        justify-content: center;
     }
 
     &_card_title {
-        margin-bottom: 1.2rem;
-        margin-top: -10px;
-        font-weight: 600;
-        font-size: 2.4rem;
-
+        margin-top: 1px;
+        font-size: 1.1rem;
     }
 
     &_card_caption {
-        margin-top: 10px;
-        font-size: 1.8rem;
-        line-height: 1.6;
+        // margin-top: 10px;
+        line-height: 1;
 
         & a {
             text-decoration: none;
@@ -306,11 +257,6 @@
                 text-decoration: underline;
             }
         }
-    }
-
-    &_contact__info_card_phone {
-        font-weight: 400;
-        color: #040413;
     }
 }
 

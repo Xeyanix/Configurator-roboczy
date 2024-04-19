@@ -41,11 +41,11 @@ function Contact() {
     };
 
     return (
-        <div className={styles.box}>
-            <div className={styles.container}>
-                <ResponsiveAppBar />
-                <div>
-                    <section className={styles.banner}>
+        <div>
+            <ResponsiveAppBar />
+            <main>
+                <div className={styles.MainContainer}>
+                    <div className={styles.banner}>
                         <div className={styles.banner__containerwrapper}>
                             <div>
                                 <h1 className={styles.banner__title}>Kontakt</h1>
@@ -55,6 +55,7 @@ function Contact() {
                                     Skontaktuj się z nami i dostosuj stronę internetową do swoich możliwości!
                                 </p>
                             </div>
+
                             <button
                                 href="#contactSection"
                                 onClick={handleScrollToContact}
@@ -79,9 +80,8 @@ function Contact() {
                                 </svg>
                             </button>
                         </div>
-                    </section>
-
-                    <section className={styles.contact} id="contactSection">
+                    </div>
+                    <div className={styles.contact} id="contactSection">
                         <div className={`${styles.contact__container} ${styles.contact__wrapper}`}>
                             <div className={`${styles.contact__content} ${styles.contact__content__left}`}>
                                 <div className={styles.contact_text}>
@@ -193,11 +193,11 @@ function Contact() {
                             <div className={`${styles.contact__content} ${styles.contact__content__right}`}>
                                 <div className={styles.contact__info_card}>
                                     <div className={styles.contact__info_card_content}>
-                                        <FontAwesomeIcon icon={faPhone} size="4x" />
+                                        <FontAwesomeIcon icon={faPhone} size="2x" />
                                         <div className={styles.contact__info_card_text}>
                                             <h4 className={styles.contact__info_card_title}>Dane kontaktowe</h4>
                                             <p className={styles.contact__info_card_caption}>
-                                                <a href="tel:+48514316481" className={styles.contact__info_card_phone} title="Link z numerem telefonu do naszej firmy.">
+                                                <a href="tel:+48514316481"  title="Link z numerem telefonu do naszej firmy.">
                                                     <span>+48 514 316 481</span>
                                                 </a>
                                             </p>
@@ -212,7 +212,7 @@ function Contact() {
 
                                 <div className={styles.contact__info_card}>
                                     <div className={styles.contact__info_card_content}>
-                                        <FontAwesomeIcon icon={faClock} size="4x" />
+                                        <FontAwesomeIcon icon={faClock} size="2x" />
                                         <div className={styles.contact__info_card_text}>
                                             <h4 className={styles.contact__info_card_title}>Godziny otwarcia</h4>
                                             <p className={styles.contact__info_card_caption}>9<sup>00</sup> - 18<sup>00</sup></p>
@@ -222,7 +222,7 @@ function Contact() {
 
                                 <div className={styles.contact__info_card}>
                                     <div className={styles.contact__info_card_content}>
-                                        <FontAwesomeIcon icon={faMapMarkerAlt} size="4x" />
+                                        <FontAwesomeIcon icon={faMapMarkerAlt} size="2x" />
                                         <div className={styles.contact__info_card_text}>
                                             <h4 className={styles.contact__info_card_title}>Wirtualne biuro</h4>
                                             <p className={styles.contact__info_card_caption}>
@@ -236,7 +236,7 @@ function Contact() {
 
                                 <div className={styles.contact__info_card}>
                                     <div className={styles.contact__info_card_content}>
-                                        <FontAwesomeIcon icon={faBriefcase} size="4x" />
+                                        <FontAwesomeIcon icon={faBriefcase} size="2x" />
                                         <div className={styles.contact__info_card_text}>
                                             <h4 className={styles.contact__info_card_title}>Dane rozliczeniowe</h4>
                                             <p className={styles.contact__info_card_caption}>
@@ -248,18 +248,16 @@ function Contact() {
                                         </div>
                                     </div>
                                 </div>
-
-
-
                             </div>
                         </div>
-                    </section>
-                </div >
-                <div id="contactSection">
-                    <Footer />
+                    </div>
                 </div>
-            </div >
+            </main >
+            <div id="contactSection">
+                <Footer />
+            </div>
         </div >
+
     );
 }
 
