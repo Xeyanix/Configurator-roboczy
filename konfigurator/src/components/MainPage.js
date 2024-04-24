@@ -13,6 +13,8 @@ function MainPage() {
         setOpenSnackbar(false);
     }, [navigate]);
 
+
+
     const redirectToOrderWebsite = () => {
         window.location.href = "/OrderWebsite";
     }
@@ -40,7 +42,6 @@ function MainPage() {
 
     return (
         <div>
-         
             <ResponsiveAppBar />
             <main>
                 <div className={styles.MainContainer}>

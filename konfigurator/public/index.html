@@ -1,27 +1,40 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
-  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" /> 
+  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#000000" /> 
-   <meta name="description" content="Web site created using create-react-app" /> 
-   <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" /> 
-   <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-  <title>WebTune | Tworzenie stron i komputerów na zamówienie</title>
- 
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="Web site created using create-react-app" />
+  <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+  <title>WebTune </title>
+
+  <script>
+    let intervalId;
+
+    function changeTitle() {
+      if (document.hidden) {
+        intervalId = setInterval(() => {
+          document.title = (document.title === "WebTune") ? "*Tworzenie stron i komputerów na zamówienie" : "WebTune";
+        }, 5000);
+      } else {
+        clearInterval(intervalId);
+        document.title = "WebTune";
+      }
+    }
+    document.addEventListener("visibilitychange", changeTitle);
+  </script>
 </head>
-<body>  
+
+<body>
   <header>
-  
-   
   </header>
 
   <div id="root">
-  
   </div>
-  
+
 </body>
+
 </html>
-
-

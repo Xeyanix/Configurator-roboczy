@@ -27,6 +27,7 @@ function Footer() {
     }, []);
 
     return (
+
         <div className={styles.footer}>
             <div className={styles.footerContainer}>
                 <div>
@@ -59,9 +60,9 @@ function Footer() {
                         <li>
                             <Link to="/" href="#projectSection" onClick={scrollToTop}>Oferta</Link>
                         </li>
-                        {/* <li>
+                        <li>
                             <a href="" onClick={scrollToTop}>Realizacje</a>
-                        </li> */}
+                        </li>
                         <li>
                             <Link to="/Contact" onClick={scrollToTop}> Kontakt</Link>
                         </li>
@@ -177,10 +178,12 @@ function Footer() {
             >
                 <FontAwesomeIcon icon={faAngleUp} />
 
-            </div>
-        </div >
+            </div> </div >
+
+
     );
 }
 
 export default Footer;
+
 

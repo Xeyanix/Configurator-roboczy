@@ -7,21 +7,16 @@ import MenuItem from '@mui/material/MenuItem';
 import { useAuth } from "../context/Context";
 import Alert from '@mui/material/Alert';
 import CloseIcon from '@mui/icons-material/Close';
-import Brightness7 from '@mui/icons-material/Brightness7';
-import Brightness4 from '@mui/icons-material/Brightness4';
 
 function ResponsiveAppBar() {
-  const [darkMode, setDarkMode] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const { loggedInUser } = useAuth();
   const [openSnackbar, setOpenSnackbar] = useState(true);
   const navigate = useNavigate();
 
-  const toggleDarkMode = () => {
-    console.log("toggleDarkMode called");
-    setDarkMode(!darkMode);
-    console.log("Stan darkMode po aktualizacji:", !darkMode);
-  };
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [navigate]);
 
   const toggleDrawer = (open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -40,7 +35,6 @@ function ResponsiveAppBar() {
   };
 
   useEffect(() => {
-    // Resetuj stan "open" przy zmianie ścieżki
     setOpenSnackbar(false);
   }, [navigate]);
 
@@ -91,7 +85,7 @@ function ResponsiveAppBar() {
 
   return (
     <div>
-      <AppBar position="static" className={darkMode ? styles.darkMode : styles.lightMode}>
+      <AppBar position="fixed" >
         <Toolbar className={styles.wrapper}>
           <div className={styles.otherPageButtons}>
             <h3 className="navbar-title">
@@ -125,14 +119,7 @@ function ResponsiveAppBar() {
 
               )
             ))}
-            <IconButton
-              edge="end"
-              color="inherit"
-              aria-label="dark mode toggle"
-              onClick={toggleDarkMode}
-            >
-              {darkMode ? <Brightness7 /> : <Brightness4 />}
-            </IconButton>
+       
             {!loggedInUser && (
               <Snackbar
                 open={openSnackbar}

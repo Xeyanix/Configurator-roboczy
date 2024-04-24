@@ -1,30 +1,19 @@
-
-.lightMode {
-  background-color: #ffffff; // tło w trybie jasnym
-  color: #000000; // kolor tekstu w trybie jasnym
-}
-
-.darkMode {
-  background-color: #1f1f1f; // tło w trybie ciemnym
-  color: #ffffff; // kolor tekstu w trybie ciemnym
-}
-
 .App {
-  display: flex;
+  display: fixed;
   width: 100%;
   text-align: center;
+  margin-top: 50px;
+
 }
 
 .wrapper {
   display: flex;
-  height: 230px;
+  height: 50px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   color: black;
-  border: 1px solid black;
   background-color: lightblue;
-  transition: background-color 0.3s ease;
   cursor: pointer;
 }
 
@@ -34,9 +23,7 @@
   margin: 35px;
   flex-direction: flex;
   align-items: center;
-
-
-  border: 1.5px solid black;
+  // border: 1.5px solid black;
   border-radius: 8px;
   height: 50px;
   width: 100%;
@@ -51,9 +38,7 @@
   text-decoration: underline;
 }
 
-.wrapper:hover {
-  background-color: #2980b9;
-}
+
 
 .myButton {
   background-color: #4caf50;
