@@ -87,12 +87,12 @@ function ResponsiveAppBar() {
     <div>
       <AppBar position="fixed" >
         <Toolbar className={styles.wrapper}>
+          <h3 className={styles.logo}>
+            <Link to="/">
+            <span>Web</span><span className={styles.tune}>Tune</span>
+            </Link>
+          </h3>
           <div className={styles.otherPageButtons}>
-            <h3 className="navbar-title">
-              <Link to="/">
-                WebTune <span className="navbar-sign">+</span>
-              </Link>
-            </h3>
             <IconButton
               edge="start"
               color="inherit"
@@ -112,6 +112,7 @@ function ResponsiveAppBar() {
                   component={item.path ? Link : "button"}
                   to={item.path}
                   onClick={item.onClick}
+                  className={styles.buttons}
                 >
                   <ListItemText primary={item.label} />
 
@@ -119,7 +120,7 @@ function ResponsiveAppBar() {
 
               )
             ))}
-       
+
             {!loggedInUser && (
               <Snackbar
                 open={openSnackbar}

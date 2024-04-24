@@ -45,11 +45,12 @@ function MainPage() {
             <ResponsiveAppBar />
             <main>
                 <div className={styles.MainContainer}>
-                    <header className={styles.header}>
+
+                    <header id="projectSection" className={styles.header}>
                         <h1>Oferta</h1>
                     </header>
+                    <section  className={styles.projects}>
 
-                    <section id="projectSection" className={styles.projects}>
                         {projectsData.map((project, index) => (
                             <div
                                 key={index}

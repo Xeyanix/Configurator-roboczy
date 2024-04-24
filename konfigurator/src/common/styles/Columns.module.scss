@@ -2,16 +2,13 @@
   display: fixed;
   width: 100%;
   text-align: center;
-  margin-top: 50px;
-
 }
 
 .wrapper {
   display: flex;
   height: 50px;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  // justify-content: center;
   color: black;
   background-color: lightblue;
   cursor: pointer;
@@ -23,10 +20,40 @@
   margin: 35px;
   flex-direction: flex;
   align-items: center;
-  // border: 1.5px solid black;
-  border-radius: 8px;
-  height: 50px;
   width: 100%;
+  position: relative;
+}
+
+.otherPageButtons .buttons::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  width: 0;
+  height: 2px;
+  background-color: yellow;
+  transition: width 0.3s ease, left 0.3s ease, right 0.3s ease;
+}
+
+.otherPageButtons .buttons:hover::after {
+  width: 100%;
+  left: 0;
+}
+
+.otherPageButtons .buttons:not(:hover)::after {
+  left: auto;
+  right: 0;
+}
+
+.logo a {
+  text-decoration: none;
+  color: #000000;
+  font-size: 24px;
+  font-weight: bold;
+  font-family: 'Poppins', sans-serif;
+}
+
+.logo a:hover .tune {
+  color: #fff200;
 }
 
 .loggedInMessage {
@@ -37,8 +64,6 @@
   align-items: center;
   text-decoration: underline;
 }
-
-
 
 .myButton {
   background-color: #4caf50;
