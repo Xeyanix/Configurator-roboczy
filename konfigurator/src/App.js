@@ -19,7 +19,6 @@ function App() {
           <ResponsiveAppBar
             loggedInUser={loggedInUser}
           />
-          
           <Header />
           {/* <Filters
             Motherboards={Motherboards}

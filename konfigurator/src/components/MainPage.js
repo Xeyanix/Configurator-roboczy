@@ -43,30 +43,51 @@ function MainPage() {
     return (
         <div>
             <ResponsiveAppBar />
+
             <main>
                 <div className={styles.MainContainer}>
+                    <section id="aboutSection" className={styles.about}>
+                        <div class="container" className={styles.header}>
+                            <h2>O nas</h2>
+                            <p>Web Tune to firma zajmująca się tworzeniem profesjonalnych stron internetowych oraz budowaniem komputerów na zamówienie od lat. Nasz zespół ekspertów składa się z doświadczonych programistów, grafików i specjalistów od sprzętu komputerowego.</p>
+                            <p>Jesteśmy dumni z naszego podejścia do projektowania, które skupia się na precyzji, kreatywności i zadowoleniu klienta. Bez względu na to, czy potrzebujesz nowoczesnej strony internetowej dla swojej firmy czy też wydajnego komputera do pracy, jesteśmy tutaj, aby Ci pomóc.</p>
+                        </div>
+                    </section>
+                    <section className={styles.offer}>
+                        <div id="projectSection" className={styles.header}>
 
-                    <header id="projectSection" className={styles.header}>
-                        <h1>Oferta</h1>
-                    </header>
-                    <section  className={styles.projects}>
+                            <p>Oferta</p>
+                            <h2 class="section__title section__title--no-margin">
+                                Sukces w zasięgu ręki – zapoznaj się z naszymi usługami.
+                            </h2>
+                        </div>
+                        <div className={styles.projects}>
+                            {projectsData.map((project, index) => (
+                                <div
+                                    key={index}
+                                    className={styles.option}
+                                    onClick={index === 0 ? redirectToOrderWebsite : index === 2 ? redirectToOrderPC : index === 3 ? redirectToCV : () => redirectToConfigurator(index)}>
 
-                        {projectsData.map((project, index) => (
-                            <div
-                                key={index}
-                                className={styles.option}
-                                onClick={index === 0 ? redirectToOrderWebsite : index === 2 ? redirectToOrderPC : index === 3 ? redirectToCV : () => redirectToConfigurator(index)}>
+                                    <h2>{project.title}</h2>
 
-                                <h2>{project.title}</h2>
+                                    <p>{project.description}</p>
+                                    <Link to={index === 0 ? "/OrderWebsite" : index === 2 ? "/OrderPC" : index === 3 ? "/ShowPage" : "/ConfigurePage"}>
+                                        <Button variant="contained">
+                                            {project.buttonText}
+                                        </Button>
+                                    </Link>
+                                </div>
+                            ))}
+                        </div>
+                        <div className={styles.aboutButton} >
+                            <Link to="/Offer">
+                                <Button variant="contained">
 
-                                <p>{project.description}</p>
-                                <Link to={index === 0 ? "/OrderWebsite" : index === 2 ? "/OrderPC" : index === 3 ? "/ShowPage" : "/ConfigurePage"}>
-                                    <Button variant="contained">
-                                        {project.buttonText}
-                                    </Button>
-                                </Link>
-                            </div>
-                        ))}
+                                    Zobacz wszystkie nasze usługi
+
+                                </Button>
+                            </Link>
+                        </div>
                     </section>
                 </div>
 
@@ -76,8 +97,8 @@ function MainPage() {
                     </div>
 
                 </div>
-            </main>
-        </div>
+            </main >
+        </div >
     );
 }
 

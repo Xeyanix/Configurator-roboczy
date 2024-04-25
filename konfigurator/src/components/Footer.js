@@ -55,10 +55,10 @@ function Footer() {
                             <Link to="/" onClick={scrollToTop}>Strona Główna</Link>
                         </li>
                         <li>
-                            <Link to="/" onClick={scrollToTop}>O nas</Link>
+                            <Link to="/About" onClick={scrollToTop}>O nas</Link>
                         </li>
                         <li>
-                            <Link to="/" href="#projectSection" onClick={scrollToTop}>Oferta</Link>
+                            <Link to="/Offer" href="#projectSection" onClick={scrollToTop}>Oferta</Link>
                         </li>
                         <li>
                             <a href="" onClick={scrollToTop}>Realizacje</a>

@@ -13,6 +13,8 @@ import { AuthProvider } from './context/Context';
 import MainPage from './components/MainPage';
 import ShowPage from './components/ShowPage';
 import Contact from './components/Contact';
+import About from './components/About';
+import Offer from './components/Offer';
 
 const router = createBrowserRouter([
   {
@@ -23,33 +25,35 @@ const router = createBrowserRouter([
   {
     path: "/ShowPage",
     element: <ShowPage />,
-
   },
   {
     path: "/ConfigurePage",
     element: <ConfigurePage />,
-
+  },
+  {
+    path: "/LoginPage",
+    element: <LoginPage />,
   },
   {
     path: "/configurator",
     element: <App />,
   },
   {
-    path: "/LoginPage",
-    element: <LoginPage />,
-
-  },
-  {
     path: "/UserPage",
     element: <UserPage />,
-
   },
   {
     path: "/Contact",
     element: <Contact />,
-
   },
- 
+  {
+    path: "/About",
+    element: <About />,
+  },
+  {
+    path: "/Offer",
+    element: <Offer />,
+  },
 ]);
 
 ReactDOM.render(

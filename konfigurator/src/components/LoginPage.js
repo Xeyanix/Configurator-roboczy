@@ -8,6 +8,7 @@ import { useAuth } from "../context/Context";
 import Alert from '@mui/material/Alert';
 import CheckIcon from '@mui/icons-material/Check';
 import Footer from "./Footer";
+import ResponsiveAppBar from "./ResponsiveAppBar";
 
 function LoginPage() {
   let navigate = useNavigate();
@@ -23,20 +24,21 @@ function LoginPage() {
     login(fullName);
     console.log(`Zalogowany jako: ${userfirstName} ${userLastName}`);
 
-    setUserFirstName(""); // Czyszczenie stanu
+    setUserFirstName(""); 
     setUserLastName(""); // Czyszczenie stanu
 
     setTimeout(() => {
       setShowLoginMessage(true);
       setTimeout(() => {
         setShowLoginMessage(false);
-        navigate(`/configurator?user=${fullName}`);
-      }, 1000); // 1000 milliseconds (1 second)
-    }, 100); // 100 milliseconds (0.1 second)
+        navigate(`/UserPage?user=${fullName}`);
+      }, 1000); 
+    }, 100); 
   };
 
   return (
     <div>
+      <ResponsiveAppBar />
       <form className={styles.loginPageWrapper} onSubmit={signInUser}>
         <Box sx={{ m: 2 }}>
           <TextField

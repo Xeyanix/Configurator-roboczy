@@ -2,6 +2,23 @@
   background-color: #0000009f;
   max-width: 100%;
   margin-top: 50px;
+
+  .about {
+    background-color: rgb(69, 129, 44);
+    height: 1000px;
+    padding: 30px;
+  }
+
+  .offer {
+    padding: 30px;
+    // background-color: blue;
+  }
+
+  .header {
+    color: #fff;
+    text-align: center;
+    padding: 2rem;
+  }
 }
 
 .otherPageButtons {
@@ -15,18 +32,14 @@
   width: 100%;
 }
 
-.header {
-  // background-color: #333;
-  color: #fff;
-  text-align: center;
-  padding: 2rem;
-}
+
+
+
 
 .projects {
   display: grid;
   grid-template-rows: auto auto;
   grid-template-columns: auto auto;
-  background-color: rgba(43, 102, 54, 0.727);
   height: calc(100vh - 100px);
   overflow-x: auto;
 
@@ -50,34 +63,6 @@
   }
 }
 
-
-.scroll_up {
-  width: 45px;
-  height: 45px;
-  display: none;
-  align-items: center;
+.aboutButton {
   text-align: center;
-  justify-content: center;
-  color: white;
-  border: 3px solid white;
-  border-radius: 50%;
-  background-color: green;
-  position: fixed;
-  bottom: 50px;
-  right: 50px;
-  font-size: 24px;
-  z-index: 20;
-  cursor: pointer;
-}
-
-.showScroll  {
-  display: flex;
-}
-
-@media screen and (max-width: 600px) {
-
-  .scroll-up {
-    bottom: 32px;
-    right: 32px;
-  }
 }

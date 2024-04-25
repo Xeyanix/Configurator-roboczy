@@ -7,7 +7,7 @@ import { useLocation } from "react-router-dom";
 import ResponsiveAppBar from "./ResponsiveAppBar";
 import Footer from './Footer';
 
-function MainPage() {
+function ConfigurePage() {
   const { state } = useLocation();
   const loggedInUser = state?.loggedInUser;
   const [setScrollPosition] = useState(0);
@@ -159,4 +159,4 @@ function MainPage() {
   );
 }
 
-export default MainPage;
+export default ConfigurePage;

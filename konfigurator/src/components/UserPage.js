@@ -8,6 +8,7 @@ import { Navigate } from "react-router-dom";
 import Alert from '@mui/material/Alert';
 import CheckIcon from '@mui/icons-material/Check';
 import Footer from "./Footer";
+import ResponsiveAppBar from "./ResponsiveAppBar";
 
 function UserPage() {
   const { loggedInUser, logout } = useAuth();
@@ -33,11 +34,12 @@ function UserPage() {
 
   return (
     <div>
+      <ResponsiveAppBar />
       <div className={styles.mainContainer}>
         {loggedInUser ? (
 
           <div>
-            <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
+            <Alert className={styles.alert} icon={<CheckIcon fontSize="inherit" />} severity="success">
               Zalogowany jako: {loggedInUser}
             </Alert>
             <Link to="/LoginPage">

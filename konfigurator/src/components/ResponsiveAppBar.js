@@ -7,6 +7,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { useAuth } from "../context/Context";
 import Alert from '@mui/material/Alert';
 import CloseIcon from '@mui/icons-material/Close';
+import CheckIcon from '@mui/icons-material/Check';
 
 function ResponsiveAppBar() {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -61,8 +62,8 @@ function ResponsiveAppBar() {
   };
   const BarItems = [
     { label: "Strona Główna", path: "/" },
-    { label: "O nas", path: "" },
-    { label: "Oferta", onClick: scrollToProjectSection },
+    { label: "O nas", path: "/About" },
+    { label: "Oferta", path: "/Offer", onClick: scrollToProjectSection },
     { label: "Realizacje", path: "" },
     { label: "Konfiguruj !", path: "/ConfigurePage" },
     { label: "Zaloguj", path: "/LoginPage" },
@@ -72,8 +73,8 @@ function ResponsiveAppBar() {
 
   const menuItems = [
     { label: "Strona Główna", path: "/" },
-    { label: "O nas", path: "" },
-    { label: "Oferta", onClick: scrollToProjectSection },
+    { label: "O nas", path: "/About" },
+    { label: "Oferta", path: "/Offer", onClick: scrollToProjectSection },
     { label: "Realizacje", path: "" },
     { label: "Konfiguruj !", path: "/ConfigurePage" },
     { label: "Zaloguj", path: "/LoginPage" },
@@ -89,7 +90,7 @@ function ResponsiveAppBar() {
         <Toolbar className={styles.wrapper}>
           <h3 className={styles.logo}>
             <Link to="/">
-            <span>Web</span><span className={styles.tune}>Tune</span>
+              <span>Web</span><span className={styles.tune}>Tune</span>
             </Link>
           </h3>
           <div className={styles.otherPageButtons}>
@@ -142,11 +143,13 @@ function ResponsiveAppBar() {
 
             {loggedInUser && (
               <Alert
+                icon={<CheckIcon fontSize="inherit" />}
                 severity="success"
                 open={openSnackbar}
+                className={styles.alert}
               // onClose={() => setOpenSnackbar(false)}
               >
-                Zalogowany jako: {loggedInUser}
+                Zalogowany: {loggedInUser}
               </Alert>
             )}
 
