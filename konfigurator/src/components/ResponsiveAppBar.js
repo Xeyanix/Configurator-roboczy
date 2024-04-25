@@ -39,6 +39,8 @@ function ResponsiveAppBar() {
     setOpenSnackbar(false);
   }, [navigate]);
 
+ 
+
   const scrollToContactSection = () => {
     const contactSection = document.getElementById("contactSection");
     if (contactSection) {
