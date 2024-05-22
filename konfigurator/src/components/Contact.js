@@ -197,7 +197,7 @@ function Contact() {
                                         <div className={styles.contact__info_card_text}>
                                             <h4 className={styles.contact__info_card_title}>Dane kontaktowe</h4>
                                             <p className={styles.contact__info_card_caption}>
-                                                <a href="tel:+48514316481"  title="Link z numerem telefonu do naszej firmy.">
+                                                <a href="tel:+48514316481" title="Link z numerem telefonu do naszej firmy.">
                                                     <span>+48 514 316 481</span>
                                                 </a>
                                             </p>
@@ -252,10 +252,10 @@ function Contact() {
                         </div>
                     </div>
                 </div>
+                <div id="contactSection">
+                    <Footer />
+                </div>
             </main >
-            <div id="contactSection">
-                <Footer />
-            </div>
         </div >
 
     );

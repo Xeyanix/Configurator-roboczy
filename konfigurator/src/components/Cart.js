@@ -86,11 +86,6 @@ function Cart() {
         {product.name} - {product.price} zł
 
         <span onClick={() => handleItemClick(product)}>
-          {loadingStatus === "RemovingItem" && deletedItemId === product.id ? (
-            <CircularProgress />
-          ) : (
-            ""
-          )}
         </span>
         <button
           className={styles.myButton}

@@ -19,15 +19,15 @@ function Offer() {
 
 
     return (
-        <div>
+        <div className={styles.Box}>
             <ResponsiveAppBar />
             <div className={styles.mainContainer}>
                 <section id="aboutSection" className={styles.about}>
                     <div class="container" className={styles.header}>
-                    <p>Oferta</p>
-                            <h2 class="section__title section__title--no-margin">
-                                Sukces w zasięgu ręki – zapoznaj się z naszymi usługami.
-                            </h2>
+                        <p>Oferta</p>
+                        <h2 class="section__title section__title--no-margin">
+                            Sukces w zasięgu ręki – zapoznaj się z naszymi usługami.
+                        </h2>
                     </div>
                 </section>
             </div>

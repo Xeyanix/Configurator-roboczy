@@ -1,19 +1,29 @@
-.mainContainer {
-  height: 100%;
-  margin: auto;
-  margin-top: 50px;
-  max-width: 800px;
+.userForm {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
+  margin: 50px auto;
+  max-width: 800px;
   padding: 20px;
-  background-color: #f8f8f8;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  .MuiTextField-root {
+    margin-bottom: 20px;
+    width: 100%;
+  }
+
+  .MuiButton-root {
+    margin-top: 20px;
+    width: 100%;
+  }
 }
 
-.alert {
-  background-color: transparent;
-}
-
-.tooltip {
-  cursor: pointer;
+@media (max-width: 600px) {
+  .userForm {
+    margin: 20px auto;
+    padding: 10px;
+  }
 }

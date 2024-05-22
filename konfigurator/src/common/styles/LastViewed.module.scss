@@ -7,20 +7,40 @@
     color: white;
     background-color: darkcyan;
     overflow-x: auto;
-    
-}
 
-.font {
-    font-size: 14px;
-    border: 2px solid;
-    border-radius: 25px;
-    box-sizing: border-box;
-    padding: 6px;
-    /* Lub inny preferowany rozmiar czcionki */
-    text-align: center;
-}
+    .font {
+        font-size: 14px;
+        border-radius: 25px;
+        box-sizing: border-box;
+        padding: 6px;
+        text-align: center;
 
-.productList {
-    display: inline-block;
-    margin: 10px;
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .emptyMessage {
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .lastViewedProducts {
+            font-style: italic;
+            border-radius: 10px;
+            padding: 10px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .productList {
+            display: inline-block;
+            margin: 10px;
+            margin-right: 10px;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+        }
+    }
+
+
 }

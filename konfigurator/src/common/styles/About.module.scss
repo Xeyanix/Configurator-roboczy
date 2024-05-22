@@ -1,6 +1,10 @@
+.Box {
+  margin-top: 65px;
+}
+
 .mainContainer {
   height: 100%;
-  height: 10000px;
+  min-height: 100vh;
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;

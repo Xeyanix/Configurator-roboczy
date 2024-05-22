@@ -131,7 +131,6 @@
   color: white;
   cursor: pointer;
   position: relative;
-  border: 1px solid #ccc;
 
   &::after {
     content: attr(customTitle);

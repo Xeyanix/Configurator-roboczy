@@ -1,13 +1,15 @@
+.Box{
+  margin-top: 65px;
+}
+
 .mainContainer {
   height: 100%;
   max-width: 800px;
+  // min-height: calc(100vh - 50px); 
+  min-height: 100vh;
   margin: 0 auto;
-  padding: 20px;
+  padding: 30px;
   background-color: #f8f8f8;
-  border: 1px solid #ddd;
+  border: 1px solid #c4baba;
   border-radius: 5px;
-}
-
-.tooltip {
-  cursor: pointer;
 }

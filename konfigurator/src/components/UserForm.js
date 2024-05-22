@@ -1,4 +1,3 @@
-// UserForm.jsx
 import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -20,7 +19,6 @@ function UserForm() {
         console.log("Form submitted with data:", formData);
     };
 
-    // Event handler for input changes
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData((prevData) => ({

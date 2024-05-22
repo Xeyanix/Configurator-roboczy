@@ -7,7 +7,6 @@ import {
   setProductsLoadingState,
   addToLastViewed,
 } from "../redux/appSlice";
-import { CircularProgress } from "@mui/material";
 import { v4 as uuidv4 } from "uuid";
 
 function ProductList() {
@@ -87,8 +86,10 @@ function ProductList() {
         `http://localhost:9000/products/shoppingList`
       );
       dispatch(loadCartList(shoppingListResponse.data));
+      if (!lastViewedProducts.find((p) => p.id === product.id)) {
+        dispatch(addToLastViewed([...lastViewedProducts, product]));
+      }
       dispatch(setProductsLoadingState("success"));
-      dispatch(addToLastViewed(shoppingListResponse.data));
 
       let endpoint = `http://localhost:9000/products`;
 
@@ -228,17 +229,6 @@ function ProductList() {
       <header className={styles.AppHeader}>
         <div className={styles.smallerFont}>
 
-          {/* {selectedProduct && (
-            <div className={styles.productDetail}>
-              <h2>Wybrany produkt:</h2>
-              <h2>{selectedProduct.name}</h2>
-              <p>{selectedProduct.description}</p>
-              <p>Cena: {selectedProduct.price}zł</p>
-            </div>
-          )} */}
-
-
-
           {selectedCase ? (
             <>
               <button className={styles.myButton} onClick={() => handleBackTo("Cases")}>
@@ -267,50 +257,47 @@ function ProductList() {
               </button>
 
               <h3>Wybrany procesor: {selectedProcessor.name}</h3>
-              <button className={styles.myButton} onClick={() => handleBackTo("Processor")}>
-                Wróć do wyboru procesora
+              <button className={styles.myButton} onClick={() => handleBackTo("Procesor")}>
+                Wróć do listy procesorów
               </button>
 
               <h3>Wybrany RAM: {selectedRAM.name}</h3>
               <button className={styles.myButton} onClick={() => handleBackTo("RAM")}>
-                Wróć do wyboru RAM
+                Wróć do listy RAM
               </button>
 
               <h3>Wybrany SSD: {selectedSSD.name}</h3>
               <button className={styles.myButton} onClick={() => handleBackTo("SSD")}>
-                Wróć do wyboru SSD
+                Wróć do listy SSD
               </button>
 
-              <h3>Wybrany Charger: {selectedCharger.name}</h3>
+              <h3>Wybrany zasilacz: {selectedCharger.name}</h3>
               <button className={styles.myButton} onClick={() => handleBackTo("Charger")}>
-                Wróć do wyboru Charger
+                Wróć do listy zasilaczy
               </button>
 
-              <h3>Wybrany GPU: {selectedGPU.name}</h3>
+              <h3>Wybrane GPU: {selectedGPU.name}</h3>
               <button className={styles.myButton} onClick={() => handleBackTo("GPU")}>
-                Wróć do wyboru GPU
+                Wróć do listy GPU
               </button>
 
               <h3>Wybierz obudowę:</h3>
-              {cases.length > 0 ? (
-                cases.map((Case) => (
-                  <div className={styles.productsListNames} key={Case.id}>
-                    <span onClick={() => handleItemClick(Case)}>
-                      {Case.name} - {Case.price}zł<br />
-                      {loadingStatus === "AddingItem" && addedItemId === Case.id ? (
-                        <CircularProgress />
-                      ) : (
-                        ""
-                      )}
-                    </span>
-                    <button className={styles.myButton} onClick={() => handleItemClick(Case)}>
-                      Dodaj do koszyka
-                    </button>
-                  </div>
-                ))
-              ) : (
-                <p>Loading Cases...</p>
-              )}
+              <div className={styles.productContainer}>
+                {cases.length > 0 ? (
+                  cases.map((Case) => (
+                    <div key={Case.id} className={styles.productsListNames}>
+                      <h3>{Case.name}</h3>
+                      {/* <img src={Case.img} alt={Case.name} className={styles.productImage} /> */}
+                      <p>Cena: {Case.price} zł</p>
+                      <button className={styles.myButton} onClick={() => handleItemClick(Case)}>
+                        Dodaj do koszyka
+                      </button>
+                    </div>
+                  ))
+                ) : (
+                  <p>Loading Cases...</p>
+                )}
+              </div>
             </>
           ) : selectedCharger ? (
             <>
@@ -320,45 +307,42 @@ function ProductList() {
               </button>
 
               <h3>Wybrany procesor: {selectedProcessor.name}</h3>
-              <button className={styles.myButton} onClick={() => handleBackTo("Processor")}>
-                Wróć do wyboru procesora
+              <button className={styles.myButton} onClick={() => handleBackTo("Procesor")}>
+                Wróć do listy procesorów
               </button>
 
               <h3>Wybrany RAM: {selectedRAM.name}</h3>
               <button className={styles.myButton} onClick={() => handleBackTo("RAM")}>
-                Wróć do wyboru RAM
+                Wróć do listy RAM
               </button>
 
               <h3>Wybrany SSD: {selectedSSD.name}</h3>
               <button className={styles.myButton} onClick={() => handleBackTo("SSD")}>
-                Wróć do wyboru SSD
+                Wróć do listy SSD
               </button>
 
-              <h3>Wybrany Charger: {selectedCharger.name}</h3>
+              <h3>Wybrany zasilacz: {selectedCharger.name}</h3>
               <button className={styles.myButton} onClick={() => handleBackTo("Charger")}>
-                Wróć do wyboru Charger
+                Wróć do listy zasilaczy
               </button>
 
               <h3>Wybierz GPU:</h3>
-              {gpus.length > 0 ? (
-                gpus.map((gpu) => (
-                  <div className={styles.productsListNames} key={gpu.id}>
-                    <span onClick={() => handleItemClick(gpu)}>
-                      {gpu.name} - {gpu.price}zł<br />
-                      {loadingStatus === "AddingItem" && addedItemId === gpu.id ? (
-                        <CircularProgress />
-                      ) : (
-                        ""
-                      )}
-                    </span>
-                    <button className={styles.myButton} onClick={() => handleItemClick(gpu)}>
-                      Dodaj do koszyka
-                    </button>
-                  </div>
-                ))
-              ) : (
-                <p>Loading Case...</p>
-              )}
+              <div className={styles.productContainer}>
+                {gpus.length > 0 ? (
+                  gpus.map((gpu) => (
+                    <div key={gpu.id} className={styles.productsListNames}>
+                      <h3>{gpu.name}</h3>
+                      {/* <img src={gpu.img} alt={gpu.name} className={styles.productImage} /> */}
+                      <p>Cena: {gpu.price} zł</p>
+                      <button className={styles.myButton} onClick={() => handleItemClick(gpu)}>
+                        Dodaj do koszyka
+                      </button>
+                    </div>
+                  ))
+                ) : (
+                  <p>Loading Gpus...</p>
+                )}
+              </div>
             </>
           ) : selectedSSD ? (
             <>
@@ -368,40 +352,37 @@ function ProductList() {
               </button>
 
               <h3>Wybrany procesor: {selectedProcessor.name}</h3>
-              <button className={styles.myButton} onClick={() => handleBackTo("Processor")}>
-                Wróć do wyboru procesora
+              <button className={styles.myButton} onClick={() => handleBackTo("Procesor")}>
+                Wróć do listy procesorów
               </button>
 
               <h3>Wybrany RAM: {selectedRAM.name}</h3>
               <button className={styles.myButton} onClick={() => handleBackTo("RAM")}>
-                Wróć do wyboru RAM
+                Wróć do listy RAM
               </button>
 
               <h3>Wybrany SSD: {selectedSSD.name}</h3>
               <button className={styles.myButton} onClick={() => handleBackTo("SSD")}>
-                Wróć do wyboru SSD
+                Wróć do listy SSD
               </button>
 
-              <h3>Wybierz Charger:</h3>
-              {chargers.length > 0 ? (
-                chargers.map((charger) => (
-                  <div className={styles.productsListNames} key={charger.id}>
-                    <span onClick={() => handleItemClick(charger)}>
-                      {charger.name} - {charger.price}zł<br />
-                      {loadingStatus === "AddingItem" && addedItemId === charger.id ? (
-                        <CircularProgress />
-                      ) : (
-                        ""
-                      )}
-                    </span>
-                    <button className={styles.myButton} onClick={() => handleItemClick(charger)}>
-                      Dodaj do koszyka
-                    </button>
-                  </div>
-                ))
-              ) : (
-                <p>Loading Chargers...</p>
-              )}
+              <h3>Wybierz zasilacz:</h3>
+              <div className={styles.productContainer}>
+                {chargers.length > 0 ? (
+                  chargers.map((charger) => (
+                    <div key={charger.id} className={styles.productsListNames}>
+                      <h3>{charger.name}</h3>
+                      {/* <img src={charger.img} alt={charger.name} className={styles.productImage} /> */}
+                      <p>Cena: {charger.price} zł</p>
+                      <button className={styles.myButton} onClick={() => handleItemClick(charger)}>
+                        Dodaj do koszyka
+                      </button>
+                    </div>
+                  ))
+                ) : (
+                  <p>Loading Chargers...</p>
+                )}
+              </div>
             </>
           ) : selectedRAM ? (
             <>
@@ -411,35 +392,32 @@ function ProductList() {
               </button>
 
               <h3>Wybrany procesor: {selectedProcessor.name}</h3>
-              <button className={styles.myButton} onClick={() => handleBackTo("Processor")}>
-                Wróć do wyboru procesora
+              <button className={styles.myButton} onClick={() => handleBackTo("Procesor")}>
+                Wróć do listy procesorów
               </button>
 
               <h3>Wybrany RAM: {selectedRAM.name}</h3>
               <button className={styles.myButton} onClick={() => handleBackTo("RAM")}>
-                Wróć do wyboru RAM
+                Wróć do listy RAM
               </button>
 
               <h3>Wybierz SSD:</h3>
-              {ssds.length > 0 ? (
-                ssds.map((ssd) => (
-                  <div className={styles.productsListNames} key={ssd.id}>
-                    <span onClick={() => handleItemClick(ssd)}>
-                      {ssd.name} - {ssd.price}zł<br />
-                      {loadingStatus === "AddingItem" && addedItemId === ssd.id ? (
-                        <CircularProgress />
-                      ) : (
-                        ""
-                      )}
-                    </span>
-                    <button className={styles.myButton} onClick={() => handleItemClick(ssd)}>
-                      Dodaj do koszyka
-                    </button>
-                  </div>
-                ))
-              ) : (
-                <p>Loading SSDs...</p>
-              )}
+              <div className={styles.productContainer}>
+                {ssds.length > 0 ? (
+                  ssds.map((ssd) => (
+                    <div key={ssd.id} className={styles.productItem}>
+                      <h3>{ssd.name}</h3>
+                      {/* <img src={ssd.img} alt={ssd.name} className={styles.productsListNames} /> */}
+                      <p>Cena: {ssd.price} zł</p>
+                      <button className={styles.myButton} onClick={() => handleItemClick(ssd)}>
+                        Dodaj do koszyka
+                      </button>
+                    </div>
+                  ))
+                ) : (
+                  <p>Loading SSDs...</p>
+                )}
+              </div>
             </>
           ) : selectedProcessor ? (
             <>
@@ -450,29 +428,22 @@ function ProductList() {
 
               <h3>Wybrany procesor: {selectedProcessor.name}</h3>
               <button className={styles.myButton} onClick={() => handleBackTo("Procesor")}>
-                Wróć do wyboru procesora
+                Wróć do listy procesorów
               </button>
 
               <h3>Wybierz RAM:</h3>
-              {rams.length > 0 ? (
-                rams.map((ram) => (
-                  <div className={styles.productsListNames} key={ram.id}>
-                    <span onClick={() => handleItemClick(ram)}>
-                      {ram.name} - {ram.price}zł<br />
-                      {loadingStatus === "AddingItem" && addedItemId === ram.id ? (
-                        <CircularProgress />
-                      ) : (
-                        ""
-                      )}
-                    </span>
+              <div className={styles.productContainer}>
+                {rams.map((ram) => (
+                  <div key={ram.id} className={styles.productsListNames}>
+                    <h3>{ram.name}</h3>
+                    {/* <img src={ram.img} alt={ram.name} className={styles.productImage} /> */}
+                    <p>Cena: {ram.price} zł</p>
                     <button className={styles.myButton} onClick={() => handleItemClick(ram)}>
-                      Dodaj do koszyka
+                      Wybierz
                     </button>
                   </div>
-                ))
-              ) : (
-                <p>Loading RAMs...</p>
-              )}
+                ))}
+              </div>
             </>
           ) : selectedMotherboard ? (
             <>
@@ -482,56 +453,48 @@ function ProductList() {
               </button>
 
               <h3>Wybierz procesor:</h3>
-              {processors.length > 0 ? (
-                processors.map((processor) => (
-                  <div className={styles.productsListNames} key={processor.id}>
-                    <span onClick={() => handleItemClick(processor)}>
-                      {processor.name} - {processor.price}zł<br />
-                      {loadingStatus === "AddingItem" && addedItemId === processor.id ? (
-                        <CircularProgress />
-                      ) : (
-                        ""
-                      )}
-                    </span>
-                    <button className={styles.myButton} onClick={() => handleItemClick(processor)}>
-                      Dodaj do koszyka
-                    </button>
-                  </div>
-                ))
-              ) : (
-                <p>Loading Processors...</p>
-              )}
+              <div className={styles.productContainer}>
+                {processors.length > 0 ? (
+                  processors.map((processor) => (
+                    <div key={processor.id} className={styles.productsListNames}>
+                      <h3>{processor.name}</h3>
+                      {/* <img src={processor.img} alt={processor.name} className={styles.productImage} /> */}
+                      <p>Cena: {processor.price} zł</p>
+                      <button className={styles.myButton} onClick={() => handleItemClick(processor)}>
+                        Dodaj do koszyka
+                      </button>
+                    </div>
+                  ))
+                ) : (
+                  <p>Loading Processors...</p>
+                )}
+              </div>
             </>
           ) : (
             <>
-              <h2>Wybierz płytę główną:</h2>
-              {motherboards.length > 0 ? (
-                motherboards.map((motherboard) => (
-                  <div className={styles.productsListNames} key={motherboard.id}>
-                    <span onClick={() => handleItemClick(motherboard)}>
-                      {motherboard.name} - {motherboard.price}zł<br />
-                      {loadingStatus === "AddingItem" && addedItemId === motherboard.id ? (
-                        <CircularProgress />
-                      ) : (
-                        ""
-                      )}
-                    </span>
-                    <button className={styles.myButton} onClick={() => handleItemClick(motherboard)}>
-                      Dodaj do koszyka
-                    </button>
-                  </div>
-                ))
-              ) : (
-                <p>Loading Motherboards...</p>
-              )}
+              <h1>Wybierz płytę główną:</h1>
+              <div className={styles.productContainer}>
+                {motherboards.length > 0 ? (
+                  motherboards.map((motherboard) => (
+                    <div key={motherboard.id} className={styles.productsListNames}>
+                      <h3>{motherboard.name}</h3>
+                      {/* <img src={motherboard.img} alt={motherboard.name} className={styles.productImage} /> */}
+                      <p>Cena: {motherboard.price} zł</p>
+                      <button className={styles.myButton} onClick={() => handleItemClick(motherboard)}>
+                        Dodaj do koszyka
+                      </button>
+                    </div>
+                  ))
+                ) : (
+                  <p>Loading Motherboards...</p>
+                )}
+              </div>
             </>
           )}
-
-
         </div>
-      </header>
-    </div>
+      </header >
+    </div >
   );
-}
+};
 
 export default ProductList;

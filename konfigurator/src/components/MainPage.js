@@ -90,12 +90,10 @@ function MainPage() {
                         </div>
                     </section>
                 </div>
-
                 <div>
                     <div id="contactSection">
                         <Footer />
                     </div>
-
                 </div>
             </main >
         </div >

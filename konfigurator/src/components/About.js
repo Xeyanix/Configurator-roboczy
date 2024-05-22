@@ -19,7 +19,7 @@ function About() {
 
 
     return (
-        <div>
+        <div className={styles.Box}>
             <ResponsiveAppBar />
             <div className={styles.mainContainer}>
                 <section id="aboutSection" className={styles.about}>

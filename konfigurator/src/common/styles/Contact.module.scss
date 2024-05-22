@@ -1,6 +1,9 @@
 .MainContainer {
+    height: 100%;
     max-width: 100%;
     margin-top: 52px;
+    // min-height: 100vh;
+    min-height: calc(100vh - 740px); 
 }
 
 .banner {
