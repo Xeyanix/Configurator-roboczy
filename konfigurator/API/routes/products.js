@@ -27,13 +27,13 @@ router.get("/", (req, res) => {
       id: motherboard.id,
       name: motherboard.name,
       price: motherboard.price,
-      type: 'Płyta główna', // Dodajemy pole "type", aby odróżnić płyty główne od CPU
+      type: 'Płyta główna', 
     })),
     ...cpus.map((cpu) => ({
       id: cpu.id,
       name: cpu.name,
       price: cpu.price,
-      type: 'Procesor', // Dodajemy pole "type", aby odróżnić CPU od płyt głównych
+      type: 'Procesor', 
     })),
     ...rams.map((ram) => ({
       id: ram.id,

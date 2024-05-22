@@ -236,7 +236,7 @@ function ProductList() {
               </button>
               <br />
               <h2>Podsumowanie:</h2>
-              <ul>
+              <ul className={styles.productsListNames}>
                 <li>Płyta główna: {selectedMotherboard.name} - {selectedMotherboard.price} zł</li>
                 <li>Procesor: {selectedProcessor.name} - {selectedProcessor.price} zł</li>
                 <li>Ram: {selectedRAM.name} - {selectedRAM.price} zł</li>
@@ -405,7 +405,7 @@ function ProductList() {
               <div className={styles.productContainer}>
                 {ssds.length > 0 ? (
                   ssds.map((ssd) => (
-                    <div key={ssd.id} className={styles.productItem}>
+                    <div key={ssd.id} className={styles.productsListNames}>
                       <h3>{ssd.name}</h3>
                       {/* <img src={ssd.img} alt={ssd.name} className={styles.productsListNames} /> */}
                       <p>Cena: {ssd.price} zł</p>
