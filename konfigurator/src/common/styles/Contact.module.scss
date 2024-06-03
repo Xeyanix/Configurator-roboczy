@@ -3,7 +3,7 @@
     max-width: 100%;
     margin-top: 52px;
     // min-height: 100vh;
-    min-height: calc(100vh - 740px); 
+    min-height: calc(100vh - 740px);
 }
 
 .banner {
@@ -77,32 +77,55 @@
 .contact {
     background-color: #e1f4fe;
     padding: 1rem;
+    margin: 0 auto;
+    max-width: 100%;
+
 
     &__container {
         display: flex;
+        flex-wrap: wrap;
         align-items: center;
         padding: 4.8rem;
         justify-content: space-between;
         border-radius: 100px;
         background-color: #f9f9ff;
+        margin: 0 auto;
+        max-width: 65%;
+        font-size: smaller;
+
+        @media (max-width: 768px) {
+            flex-direction: column;
+            /* Zmienia układ na kolumnowy na mniejszych ekranach */
+            padding: 2.4rem;
+        }
+
+
     }
 
     &__wrapper {
         position: relative;
         clear: both;
+        width: 100%;
     }
 
     &__content {
         flex-direction: column;
 
+
     }
 
     &__content__left {
         width: 50%;
+
     }
 
     &__content__right {
         width: 35%;
+
+        @media (max-width: 768px) {
+            width: 100%;
+            /* Dostosowanie szerokości do 100% na mniejszych ekranach */
+        }
     }
 
     &_text {
@@ -118,6 +141,7 @@
         line-height: 1;
         font-size: 2rem;
         display: flex;
+        width: 100%;
     }
 
     &__caption {
@@ -131,20 +155,27 @@
 
     &_row {
         display: flex;
-        // position: relative;
-        // flex-wrap: wrap;
         justify-content: space-between;
+        flex-wrap: wrap; 
     }
 
     &_item {
         position: relative;
         width: calc(40% - 2rem);
+
+        
+        @media (max-width: 768px) {
+            width: 100%; /* Dostosowanie szerokości do 100% na mniejszych ekranach */
+            margin-bottom: 1rem; /* Dodanie odstępu między polami na mniejszych ekranach */
+        }
+
     }
 
     &_inputField,
     &_selectField {
         position: relative;
         padding: 2.2rem;
+        width: 100%; 
         border: none;
         border-bottom: 1px solid #c8c8c8;
         outline: none;
@@ -173,6 +204,7 @@
         align-items: flex-start;
         flex-wrap: wrap;
         color: rgba(55, 60, 75, .5019607843);
+        margin-top: 1rem;
     }
 
     &_consent {
