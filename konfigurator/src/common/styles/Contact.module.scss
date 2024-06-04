@@ -156,31 +156,43 @@
     &_row {
         display: flex;
         justify-content: space-between;
-        flex-wrap: wrap; 
+        flex-wrap: wrap;
     }
 
     &_item {
         position: relative;
         width: calc(40% - 2rem);
 
-        
+
         @media (max-width: 768px) {
-            width: 100%; /* Dostosowanie szerokości do 100% na mniejszych ekranach */
-            margin-bottom: 1rem; /* Dodanie odstępu między polami na mniejszych ekranach */
+            width: 100%;
+            margin-bottom: 1rem;
         }
 
     }
 
-    &_inputField,
-    &_selectField {
+    &_inputField {
         position: relative;
-        padding: 2.2rem;
-        width: 100%; 
+        padding: 2rem;
+        width: 100%;
         border: none;
         border-bottom: 1px solid #c8c8c8;
         outline: none;
         font-family: "Rubik", sans-serif;
-        font-size: 1.2rem;
+        font-size: 1rem;
+        background-color: transparent;
+        resize: none;
+    }
+
+    &_selectField {
+        position: relative;
+        padding: 2rem;
+        width: 120%;
+        border: none;
+        border-bottom: 1px solid #c8c8c8;
+        outline: none;
+        font-family: "Rubik", sans-serif;
+        font-size: 1rem;
         background-color: transparent;
         resize: none;
     }
