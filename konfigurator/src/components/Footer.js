@@ -109,7 +109,7 @@ function Footer() {
 
             <div className={styles.contactSection}>
                 <p className={styles.copyrightText}>
-                    <Link to="/MainPage" onClick={scrollToTop} className={styles.copyrightText}>
+                    <Link to="/configurator" onClick={scrollToTop} className={styles.copyrightText}>
                         Configurator
                     </Link>
                     {' '}&copy; {new Date().getFullYear()} |
